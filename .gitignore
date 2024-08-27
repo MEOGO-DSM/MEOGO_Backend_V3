@@ -1,8 +1,12 @@
-HELP.md
-.gradle
+# Gradle files
+.gradle/
 !gradle/wrapper/gradle-wrapper.jar
+
+# Build directories
+**/build/
 !**/src/main/**/build/
 !**/src/test/**/build/
+
 ### STS ###
 .apt_generated
 .classpath
@@ -16,9 +20,7 @@ bin/
 !**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
-.idea
-.gradle
-build
+.idea/
 *.iws
 *.iml
 *.ipr
@@ -33,7 +35,7 @@ out/
 /nbdist/
 /.nb-gradle/
 
-# Package Files #
+# Package files
 *.jar
 *.war
 *.nar
@@ -42,14 +44,14 @@ out/
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# Virtual machine crash logs
 hs_err_pid*
 replay_pid*
-
 
 ### VS Code ###
 .vscode/
 
 *.log
 
+# macOS Finder
 .DS_Store
