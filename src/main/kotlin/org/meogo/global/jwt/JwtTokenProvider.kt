@@ -5,7 +5,6 @@ import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.InvalidClaimException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
-import jakarta.servlet.http.HttpServletRequest
 import org.meogo.global.auth.AuthDetailsService
 import org.meogo.global.jwt.dto.TokenResponse
 import org.meogo.global.jwt.entity.RefreshToken
@@ -16,6 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Component
 import java.util.Date
+import javax.servlet.http.HttpServletRequest
 
 @Component
 class JwtTokenProvider(

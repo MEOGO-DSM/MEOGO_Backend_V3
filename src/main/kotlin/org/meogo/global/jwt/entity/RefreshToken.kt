@@ -1,6 +1,7 @@
 package org.meogo.global.jwt.entity
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
+
+import javax.persistence.Entity
+import javax.persistence.Id
 
 @Entity
 class RefreshToken(
