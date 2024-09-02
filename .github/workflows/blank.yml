@@ -1,0 +1,29 @@
+name: meogo-main
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          
+      - name: Build Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: |
+            build
+            --build-cache
+            --no-daemon
