@@ -1,10 +1,10 @@
 plugins {
-    kotlin("jvm") version "1.9.25"
+    kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.9.25"
-    id("org.springframework.boot") version "3.3.3"
+    id("org.springframework.boot") version "2.7.16"
     id("io.spring.dependency-management") version "1.1.6"
     id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
-    kotlin("plugin.jpa") version "1.9.25"
+    kotlin("plugin.jpa") version "1.6.21"
 }
 
 group = "org.meogo"
@@ -32,9 +32,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("com.vaadin:vaadin-spring-boot-starter")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("io.jsonwebtoken:jjwt:0.9.1")
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("com.mysql:mysql-connector-j")
     annotationProcessor("org.projectlombok:lombok")
