@@ -11,9 +11,10 @@ class UserFacade(
     private val userRepository: UserRepository
 ) {
 
-    fun currentUser(): User {
-        val accountId = SecurityContextHolder.getContext().authentication.name
-        return getUserByAccountId(accountId)
+    fun currentUser(): User? {
+        val authentication = SecurityContextHolder.getContext().authentication
+        val accountId = authentication?.name
+        return accountId?.let { getUserByAccountId(it) }
     }
 
     fun getUserByAccountId(accountId: String): User =
