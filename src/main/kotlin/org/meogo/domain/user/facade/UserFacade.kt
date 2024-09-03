@@ -12,11 +12,10 @@ class UserFacade(
 ) {
 
     fun currentUser(): User? {
-        val authentication = SecurityContextHolder.getContext().authentication
-        val accountId = authentication?.name
+        val accountId = SecurityContextHolder.getContext().authentication.name
         return accountId?.let { getUserByAccountId(it) }
     }
 
-    fun getUserByAccountId(accountId: String): User =
+    fun getUserByAccountId(accountId: String) =
         userRepository.findByAccountId(accountId) ?: throw UserNotFoundException
 }
