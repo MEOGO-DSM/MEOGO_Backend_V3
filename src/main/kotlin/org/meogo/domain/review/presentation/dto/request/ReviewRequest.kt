@@ -1,4 +1,4 @@
-package org.meogo.domain.review.presentation.dto
+package org.meogo.domain.review.presentation.dto.request
 
 import javax.validation.constraints.Size
 
