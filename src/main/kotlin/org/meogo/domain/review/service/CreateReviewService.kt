@@ -23,7 +23,6 @@ class CreateReviewService(
             Review(
                 date = LocalDateTime.now(),
                 userId = user.id!!,
-                userName = user.name,
                 schoolId = request.schoolId,
                 star = request.star,
                 content = request.content,

@@ -15,19 +15,32 @@ class Review(
     @Id
     val id: Long = 0,
 
+    @Column(nullable = false)
     val date: LocalDateTime,
 
-    @Column(columnDefinition = "BINARY(16)")
+    @Column(name = "user_id", columnDefinition = "BINARY(16)")
     val userId: UUID,
 
-    val userName: String,
-
+    @Column(name = "school_id", nullable = false)
     val schoolId: Int,
 
-    val star: Long,
+    @Column(nullable = false)
+    var star: Float,
 
-    val content: String,
+    @Column(nullable = false)
+    var content: String,
 
-    val picture: String?
+    var picture: String?
 
-)
+) {
+    fun updateReview(
+        content: String,
+        star: Float,
+        picture: String?
+    ): Review {
+        this.content = content
+        this.star = star
+        this.picture = picture
+        return this
+    }
+}
