@@ -1,9 +1,9 @@
 package org.meogo.domain.review.service
 
 import org.meogo.domain.review.exception.ReviewNotFoundException
-import org.meogo.domain.review.exception.UserMisMatchException
 import org.meogo.domain.review.presentation.dto.request.ModifyReviewRequest
 import org.meogo.domain.review.repository.ReviewRepository
+import org.meogo.domain.user.exception.UserMisMatchException
 import org.meogo.domain.user.exception.UserNotFoundException
 import org.meogo.domain.user.facade.UserFacade
 import org.springframework.stereotype.Service
