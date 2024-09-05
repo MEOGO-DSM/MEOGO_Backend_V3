@@ -7,6 +7,7 @@ enum class ErrorCode(
     INVALID_TOKEN(401, "Invalid Token"),
     EXPIRED_TOKEN(401, "Expired Token"),
     PASSWORD_MISMATCH(401, "Password Mismatch"),
+    USER_MISMATCH(401, "User Mismatch"),
 
     USER_NOT_FOUND(404, "User not found"),
 
