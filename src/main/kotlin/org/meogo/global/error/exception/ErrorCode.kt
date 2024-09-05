@@ -10,6 +10,7 @@ enum class ErrorCode(
     USER_MISMATCH(401, "User Mismatch"),
 
     USER_NOT_FOUND(404, "User not found"),
+    REVIEW_NOT_FOUND(404, "Review not found"),
 
     // Internal Server Error
     INTERNAL_SERVER_ERROR(500, "Internal Server Error")

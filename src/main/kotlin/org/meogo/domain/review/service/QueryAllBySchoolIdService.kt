@@ -16,12 +16,13 @@ class QueryAllBySchoolIdService(
 
     @Transactional(readOnly = true)
     fun queryAllBySchoolId(schoolId: Int): List<ReviewResponse> {
-        val reviews = reviewRepository.findAllBySchoolId(schoolId)
+        val reviews = reviewRepository.findAllBySchoolId(schoolId) ?: return emptyList()
 
         return reviews.map { review ->
+            val user = userFacade.getUserById(review.userId)
             ReviewResponse(
                 id = review.id,
-                userName = userFacade.getUserById(review.userId).name,
+                userName = user.name,
                 content = review.content,
                 date = format(review.date),
                 star = review.star,
@@ -31,5 +32,5 @@ class QueryAllBySchoolIdService(
     }
 
     private fun format(date: LocalDateTime) =
-        date.format(DateTimeFormatter.ofPattern("MM.dd HH:mm")).toString()
+        date.format(DateTimeFormatter.ofPattern("MM.dd HH:mm"))
 }
