@@ -5,6 +5,6 @@ data class ReviewResponse(
     val content: String,
     val date: String,
     val userName: String,
-    val star: Long,
+    val star: Float,
     val picture: String?
 )
