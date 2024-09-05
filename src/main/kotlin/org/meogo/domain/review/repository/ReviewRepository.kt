@@ -9,4 +9,6 @@ interface ReviewRepository : Repository<Review, Long> {
     fun findAllBySchoolId(id: Int): List<Review>?
 
     fun findById(id: Long): Review?
+
+    fun deleteById(id: Long)
 }
