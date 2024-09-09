@@ -1,11 +1,11 @@
 package org.meogo.domain.review.service
 
+import org.meogo.domain.review.domain.ReviewRepository
 import org.meogo.domain.review.exception.ReviewNotFoundException
-import org.meogo.domain.review.repository.ReviewRepository
+import org.meogo.domain.user.domain.UserRepository
 import org.meogo.domain.user.exception.UserMisMatchException
 import org.meogo.domain.user.exception.UserNotFoundException
 import org.meogo.domain.user.facade.UserFacade
-import org.meogo.domain.user.repository.UserRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

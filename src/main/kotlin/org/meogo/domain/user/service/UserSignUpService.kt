@@ -1,9 +1,9 @@
 package org.meogo.domain.user.service
 
 import org.meogo.domain.user.domain.User
+import org.meogo.domain.user.domain.UserRepository
 import org.meogo.domain.user.domain.UserRole
 import org.meogo.domain.user.presentation.dto.request.UserSignUpRequest
-import org.meogo.domain.user.repository.UserRepository
 import org.meogo.global.jwt.JwtTokenProvider
 import org.meogo.global.jwt.dto.TokenResponse
 import org.springframework.security.crypto.password.PasswordEncoder

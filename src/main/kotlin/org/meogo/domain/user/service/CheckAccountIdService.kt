@@ -1,7 +1,7 @@
 package org.meogo.domain.user.service
 
+import org.meogo.domain.user.domain.UserRepository
 import org.meogo.domain.user.presentation.dto.request.UserCheckRequest
-import org.meogo.domain.user.repository.UserRepository
 import org.springframework.stereotype.Service
 
 @Service
