@@ -1,6 +1,5 @@
-package org.meogo.domain.user.repository
+package org.meogo.domain.user.domain
 
-import org.meogo.domain.user.domain.User
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.UUID
 

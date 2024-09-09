@@ -1,6 +1,5 @@
-package org.meogo.domain.review.repository
+package org.meogo.domain.review.domain
 
-import org.meogo.domain.review.domain.Review
 import org.springframework.data.repository.Repository
 import java.util.UUID
 
