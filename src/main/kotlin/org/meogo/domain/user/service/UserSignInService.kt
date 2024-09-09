@@ -1,9 +1,9 @@
 package org.meogo.domain.user.service
 
+import org.meogo.domain.user.domain.UserRepository
 import org.meogo.domain.user.exception.PasswordMismatchException
 import org.meogo.domain.user.exception.UserNotFoundException
 import org.meogo.domain.user.presentation.dto.request.UserSignInRequest
-import org.meogo.domain.user.repository.UserRepository
 import org.meogo.global.jwt.JwtTokenProvider
 import org.meogo.global.jwt.dto.TokenResponse
 import org.springframework.security.crypto.password.PasswordEncoder

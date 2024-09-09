@@ -1,7 +1,7 @@
 package org.meogo.domain.review.service
 
+import org.meogo.domain.review.domain.ReviewRepository
 import org.meogo.domain.review.presentation.dto.response.ReviewResponse
-import org.meogo.domain.review.repository.ReviewRepository
 import org.meogo.domain.user.facade.UserFacade
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
