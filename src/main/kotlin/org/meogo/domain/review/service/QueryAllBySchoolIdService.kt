@@ -32,5 +32,5 @@ class QueryAllBySchoolIdService(
     }
 
     private fun format(date: LocalDateTime) =
-        date.format(DateTimeFormatter.ofPattern("MM.dd HH:mm"))
+        date.format(DateTimeFormatter.ofPattern("yy.MM.dd HH:mm"))
 }
