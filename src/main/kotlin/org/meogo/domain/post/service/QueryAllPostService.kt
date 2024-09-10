@@ -4,8 +4,6 @@ import org.meogo.domain.post.domain.PostRepository
 import org.meogo.domain.post.present.dto.response.PostResponse
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 @Service
 class QueryAllPostService(
@@ -22,13 +20,10 @@ class QueryAllPostService(
                 name = "익명",
                 title = post.title,
                 content = post.content,
-                date = format(post.date),
+                date = post.format(post.date),
                 keyWord = post.keyWord?.split(",")?.map { it.trim() },
                 schoolId = post.schoolId
             )
         }.sortedBy { it.id }
     }
-
-    private fun format(date: LocalDateTime) =
-        date.format(DateTimeFormatter.ofPattern("yy.MM.dd HH:mm"))
 }
