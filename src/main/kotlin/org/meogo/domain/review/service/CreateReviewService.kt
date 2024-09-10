@@ -19,6 +19,8 @@ class CreateReviewService(
     fun execute(request: ReviewRequest) {
         val user = userFacade.currentUser() ?: throw UserNotFoundException
 
+        val keyWord = request.keyWord?.joinToString(separator = ",")
+
         reviewRepository.save(
             Review(
                 date = LocalDateTime.now(),
@@ -26,6 +28,7 @@ class CreateReviewService(
                 schoolId = request.schoolId,
                 star = request.star,
                 content = request.content,
+                keyWord = keyWord,
                 picture = request.image
             )
         )

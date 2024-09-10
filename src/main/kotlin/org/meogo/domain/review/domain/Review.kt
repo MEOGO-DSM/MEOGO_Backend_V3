@@ -30,6 +30,9 @@ class Review(
     @Column(nullable = false)
     var content: String,
 
+    @Column(name = "key_word")
+    val keyWord: String?,
+
     var picture: String?
 
 ) {

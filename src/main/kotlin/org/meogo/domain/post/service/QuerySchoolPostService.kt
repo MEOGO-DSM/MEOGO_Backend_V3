@@ -6,13 +6,13 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class QueryAllPostService(
+class QuerySchoolPostService(
     private val postRepository: PostRepository
 ) {
 
     @Transactional(readOnly = true)
-    fun execute(): List<PostResponse> {
-        val posts = postRepository.findAll()
+    fun execute(schoolId: Int): List<PostResponse> {
+        val posts = postRepository.findBySchoolId(schoolId)
 
         return posts.map { post ->
             PostResponse(
@@ -24,6 +24,6 @@ class QueryAllPostService(
                 keyWord = post.keyWord?.split(",")?.map { it.trim() },
                 schoolId = post.schoolId
             )
-        }.sortedBy { it.id }
+        }
     }
 }
