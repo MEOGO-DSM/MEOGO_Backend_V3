@@ -8,6 +8,5 @@ data class PostRequest(
     @field: Size(min = 1, max = 300)
     val content: String,
     val isOk: Boolean,
-    val image: List<String>?,
     val keyWord: List<String>?
 )
