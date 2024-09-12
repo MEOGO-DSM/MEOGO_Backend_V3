@@ -1,36 +1,50 @@
 package org.meogo.domain.review.service
 
 import org.meogo.domain.review.domain.ReviewRepository
+import org.meogo.domain.review.presentation.dto.response.ReviewListResponse
+import org.meogo.domain.review.presentation.dto.response.ReviewPictureResponse
 import org.meogo.domain.review.presentation.dto.response.ReviewResponse
 import org.meogo.domain.user.facade.UserFacade
+import org.meogo.global.s3.FileUtil
+import org.meogo.global.s3.Path
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 @Service
 class QueryAllBySchoolIdService(
     private val reviewRepository: ReviewRepository,
-    private val userFacade: UserFacade
+    private val userFacade: UserFacade,
+    private val fileUtil: FileUtil
 ) {
 
     @Transactional(readOnly = true)
-    fun queryAllBySchoolId(schoolId: Int): List<ReviewResponse> {
-        val reviews = reviewRepository.findAllBySchoolId(schoolId) ?: return emptyList()
+    fun queryAllBySchoolId(schoolId: Int): ReviewListResponse {
+        val reviews = reviewRepository.findAllBySchoolId(schoolId) ?: emptyList()
 
-        return reviews.map { review ->
-            val user = userFacade.getUserById(review.userId)
-            ReviewResponse(
-                id = review.id,
-                userName = user.name,
-                content = review.content,
-                date = format(review.date),
-                star = review.star,
-                picture = review.picture ?: ""
-            )
-        }.sortedBy { it.id }
+        val pictures = reviews
+            .flatMap { review ->
+                review.picture?.split(",")?.map { pic ->
+                    val pictureUrl = fileUtil.generateObjectUrl(pic.trim(), Path.REVIEW)
+                    ReviewPictureResponse(pictureUrl)
+                } ?: emptyList()
+            }
+
+        return ReviewListResponse(
+            count = reviews.size,
+            reviews = reviews.map { review ->
+                val userName = userFacade.getUserById(review.userId).name
+                val image = review.picture?.split(",")?.map { pic ->
+                    fileUtil.generateObjectUrl(pic.trim(), Path.REVIEW)
+                }
+                ReviewResponse(
+                    id = review.id,
+                    content = review.content,
+                    date = review.format(review.date),
+                    userName = userName,
+                    star = review.star,
+                    image = image
+                )
+            }
+        )
     }
-
-    private fun format(date: LocalDateTime) =
-        date.format(DateTimeFormatter.ofPattern("yy.MM.dd HH:mm"))
 }
