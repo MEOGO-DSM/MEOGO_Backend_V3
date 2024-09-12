@@ -7,14 +7,18 @@ import org.meogo.domain.user.presentation.dto.request.UserSignUpRequest
 import org.meogo.domain.user.presentation.dto.response.MyPageResponse
 import org.meogo.domain.user.service.CheckAccountIdService
 import org.meogo.domain.user.service.MyPageService
+import org.meogo.domain.user.service.UploadProfileService
 import org.meogo.domain.user.service.UserSignInService
 import org.meogo.domain.user.service.UserSignUpService
 import org.meogo.global.jwt.dto.TokenResponse
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestPart
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.multipart.MultipartFile
 import javax.validation.Valid
 
 @RestController
@@ -24,7 +28,8 @@ class UserController(
     private val userSignUpService: UserSignUpService,
     private val userSignInService: UserSignInService,
     private val userCheckAccountIdService: CheckAccountIdService,
-    private val myPageService: MyPageService
+    private val myPageService: MyPageService,
+    private val uploadProfileService: UploadProfileService
 ) {
     @PostMapping("/signup")
     fun signUp(
@@ -44,4 +49,8 @@ class UserController(
     @GetMapping("/myPage")
     fun myPage(): MyPageResponse =
         myPageService.execute()
+
+    @PatchMapping("/profile")
+    fun updateProfile(@RequestPart(name = "image") file: MultipartFile) =
+        uploadProfileService.uploadProfile(file)
 }

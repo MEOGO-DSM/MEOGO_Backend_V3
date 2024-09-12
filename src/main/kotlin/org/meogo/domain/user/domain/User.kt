@@ -22,8 +22,13 @@ class User(
     @Column(name = "enrolled_school", nullable = true)
     val enrolledSchool: Int? = 0,
 
-    val profile: String? = null,
+    var profile: String? = null,
 
     @Enumerated(EnumType.STRING)
     val role: UserRole
-) : BaseUUIDEntity(id)
+) : BaseUUIDEntity(id) {
+    fun updateProfile(profile: String?): User {
+        this.profile = profile
+        return this
+    }
+}
