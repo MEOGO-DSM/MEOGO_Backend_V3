@@ -6,5 +6,5 @@ data class ModifyReviewRequest(
     @field:Size(min = 1, max = 300)
     val content: String,
     val star: Float,
-    val image: String?
+    val image: List<String>?
 )

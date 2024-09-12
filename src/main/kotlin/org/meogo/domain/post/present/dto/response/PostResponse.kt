@@ -23,7 +23,7 @@ data class PostResponse(
         post.title,
         post.content,
         post.format(post.date),
-        post.keyWord?.split(",")?.map { it.trim() },
+        post.keyWord?.split(",")?.map { it.trim() } ?: emptyList(),
         post.schoolId,
         post.image?.let { fileUtil.generateObjectUrl(it, Path.COMMUNITY) }
     )

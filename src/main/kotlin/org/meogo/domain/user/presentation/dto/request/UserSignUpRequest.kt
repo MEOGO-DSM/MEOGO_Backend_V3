@@ -15,7 +15,5 @@ data class UserSignUpRequest(
     @field:NotNull
     val name: String,
 
-    val profile: String?,
-
     val enrolledSchool: String?
 )

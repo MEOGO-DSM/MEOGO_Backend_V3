@@ -4,6 +4,8 @@ enum class ErrorCode(
     val status: Int,
     val message: String
 ) {
+    INVALID_STAR_RANGE(400, "Invalid start range"),
+
     INVALID_TOKEN(401, "Invalid Token"),
     EXPIRED_TOKEN(401, "Expired Token"),
     PASSWORD_MISMATCH(401, "Password Mismatch"),

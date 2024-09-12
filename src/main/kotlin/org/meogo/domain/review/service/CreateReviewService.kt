@@ -2,6 +2,7 @@ package org.meogo.domain.review.service
 
 import org.meogo.domain.review.domain.Review
 import org.meogo.domain.review.domain.ReviewRepository
+import org.meogo.domain.review.exception.InvalidStarRangeException
 import org.meogo.domain.review.presentation.dto.request.ReviewRequest
 import org.meogo.domain.user.exception.UserNotFoundException
 import org.meogo.domain.user.facade.UserFacade
@@ -22,6 +23,8 @@ class CreateReviewService(
     @Transactional
     fun execute(request: ReviewRequest, image: List<MultipartFile>?) {
         val user = userFacade.currentUser() ?: throw UserNotFoundException
+
+        if (request.star > 5.0 || request.star < 0.0) throw InvalidStarRangeException
 
         val keyWord = request.keyWord?.joinToString(separator = ",")
         val imageUrls = image?.joinToString(separator = ",") {
