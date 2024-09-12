@@ -11,12 +11,14 @@ import org.meogo.domain.user.service.UploadProfileService
 import org.meogo.domain.user.service.UserSignInService
 import org.meogo.domain.user.service.UserSignUpService
 import org.meogo.global.jwt.dto.TokenResponse
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestPart
+import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
 import javax.validation.Valid
@@ -32,6 +34,7 @@ class UserController(
     private val uploadProfileService: UploadProfileService
 ) {
     @PostMapping("/signup")
+    @ResponseStatus(HttpStatus.CREATED)
     fun signUp(
         @Valid @RequestBody
         request: UserSignUpRequest
@@ -46,7 +49,7 @@ class UserController(
     fun checkAccountId(@RequestBody request: UserCheckRequest): Boolean =
         userCheckAccountIdService.execute(request)
 
-    @GetMapping("/myPage")
+    @GetMapping("/my")
     fun myPage(): MyPageResponse =
         myPageService.execute()
 

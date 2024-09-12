@@ -38,6 +38,6 @@ class PostController(
     @GetMapping("/query/all")
     fun queryAll() = queryAllPostService.execute()
 
-    @GetMapping("/query/school")
+    @GetMapping("/query")
     fun querySchool(@RequestParam(name = "school_id") schoolId: Int) = querySchoolPostService.execute(schoolId)
 }
