@@ -35,7 +35,9 @@ class Post(
     val schoolId: Int?,
 
     @Column(name = "key_word")
-    val keyWord: String?
+    val keyWord: String?,
+
+    val image: String?
 ) {
     fun addGood() {
         this.good += 1

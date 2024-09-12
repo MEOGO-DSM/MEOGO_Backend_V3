@@ -7,6 +7,5 @@ data class ReviewRequest(
     val content: String,
     val schoolId: Int,
     val star: Float,
-    val keyWord: List<String>?,
-    val image: String?
+    val keyWord: List<String>?
 )

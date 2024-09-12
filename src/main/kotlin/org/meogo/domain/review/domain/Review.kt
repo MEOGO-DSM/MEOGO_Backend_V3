@@ -1,6 +1,7 @@
 package org.meogo.domain.review.domain
 
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.UUID
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -46,4 +47,7 @@ class Review(
         this.picture = picture
         return this
     }
+
+    fun format(date: LocalDateTime) =
+        date.format(DateTimeFormatter.ofPattern("yy.MM.dd HH:mm"))!!
 }
