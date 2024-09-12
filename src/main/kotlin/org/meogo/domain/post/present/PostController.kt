@@ -18,7 +18,7 @@ import javax.validation.Valid
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/post")
+@RequestMapping("/community")
 class PostController(
     private val createPostService: CreatePostService,
     private val queryAllPostService: QueryAllPostService,
