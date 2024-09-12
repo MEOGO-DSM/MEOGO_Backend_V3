@@ -2,7 +2,6 @@ package org.meogo.domain.review.service
 
 import org.meogo.domain.review.domain.ReviewRepository
 import org.meogo.domain.review.presentation.dto.response.ReviewListResponse
-import org.meogo.domain.review.presentation.dto.response.ReviewPictureResponse
 import org.meogo.domain.review.presentation.dto.response.ReviewResponse
 import org.meogo.domain.user.facade.UserFacade
 import org.meogo.global.s3.FileUtil
@@ -21,21 +20,13 @@ class QueryAllBySchoolIdService(
     fun queryAllBySchoolId(schoolId: Int): ReviewListResponse {
         val reviews = reviewRepository.findAllBySchoolId(schoolId) ?: emptyList()
 
-        val pictures = reviews
-            .flatMap { review ->
-                review.picture?.split(",")?.map { pic ->
-                    val pictureUrl = fileUtil.generateObjectUrl(pic.trim(), Path.REVIEW)
-                    ReviewPictureResponse(pictureUrl)
-                } ?: emptyList()
-            }
-
         return ReviewListResponse(
             count = reviews.size,
             reviews = reviews.map { review ->
                 val userName = userFacade.getUserById(review.userId).name
                 val image = review.picture?.split(",")?.map { pic ->
                     fileUtil.generateObjectUrl(pic.trim(), Path.REVIEW)
-                }
+                } ?: emptyList()
                 ReviewResponse(
                     id = review.id,
                     content = review.content,
