@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class AwsConfig(
+class S3Config(
     @Value("\${cloud.aws.credentials.access-key}")
     private val accessKey: String,
     @Value("\${cloud.aws.credentials.secret-key}")
