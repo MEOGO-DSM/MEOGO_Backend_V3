@@ -21,6 +21,6 @@ class QuerySchoolPostService(
                 post,
                 fileUtil
             )
-        }.sortedBy { it.id }
+        }.sortedByDescending { it.id }
     }
 }

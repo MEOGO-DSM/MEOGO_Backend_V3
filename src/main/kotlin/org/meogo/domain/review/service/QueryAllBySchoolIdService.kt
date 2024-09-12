@@ -35,7 +35,7 @@ class QueryAllBySchoolIdService(
                     star = review.star,
                     image = image
                 )
-            }
+            }.sortedByDescending { it.id }
         )
     }
 }
