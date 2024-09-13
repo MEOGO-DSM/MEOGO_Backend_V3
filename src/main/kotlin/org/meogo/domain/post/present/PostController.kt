@@ -3,9 +3,11 @@ package org.meogo.domain.post.present
 import lombok.RequiredArgsConstructor
 import org.meogo.domain.post.present.dto.request.PostRequest
 import org.meogo.domain.post.service.CreatePostService
+import org.meogo.domain.post.service.DeletePostService
 import org.meogo.domain.post.service.QueryAllPostService
 import org.meogo.domain.post.service.QuerySchoolPostService
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -22,7 +24,8 @@ import javax.validation.Valid
 class PostController(
     private val createPostService: CreatePostService,
     private val queryAllPostService: QueryAllPostService,
-    private val querySchoolPostService: QuerySchoolPostService
+    private val querySchoolPostService: QuerySchoolPostService,
+    private val deletePostService: DeletePostService
 ) {
 
     @PostMapping
@@ -34,6 +37,11 @@ class PostController(
         @RequestPart("image") image: MultipartFile?
     ) =
         createPostService.execute(request, image)
+
+    @DeleteMapping("/delete")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun delete(@RequestParam("post_id") id: Long) =
+        deletePostService.execute(id)
 
     @GetMapping("/query/all")
     fun queryAll() = queryAllPostService.execute()
