@@ -1,7 +1,7 @@
 package org.meogo.domain.post.service
 
 import org.meogo.domain.post.domain.PostRepository
-import org.meogo.domain.post.present.dto.response.PostResponse
+import org.meogo.domain.post.presentation.dto.response.PostResponse
 import org.meogo.global.s3.FileUtil
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

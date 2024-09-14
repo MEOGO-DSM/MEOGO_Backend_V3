@@ -2,7 +2,7 @@ package org.meogo.domain.post.service
 
 import org.meogo.domain.post.domain.Post
 import org.meogo.domain.post.domain.PostRepository
-import org.meogo.domain.post.present.dto.request.PostRequest
+import org.meogo.domain.post.presentation.dto.request.PostRequest
 import org.meogo.domain.user.exception.UserNotFoundException
 import org.meogo.domain.user.facade.UserFacade
 import org.meogo.global.s3.FileUtil
