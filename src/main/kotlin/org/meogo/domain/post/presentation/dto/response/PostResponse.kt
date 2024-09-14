@@ -1,4 +1,4 @@
-package org.meogo.domain.post.present.dto.response
+package org.meogo.domain.post.presentation.dto.response
 
 import org.meogo.domain.post.domain.Post
 import org.meogo.global.s3.FileUtil

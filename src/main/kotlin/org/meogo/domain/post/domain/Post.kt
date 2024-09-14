@@ -17,10 +17,10 @@ class Post(
     val id: Long = 0,
 
     @Column(nullable = false)
-    val title: String,
+    var title: String,
 
     @Column(nullable = false)
-    val content: String,
+    var content: String,
 
     @Column(name = "user_id", columnDefinition = "BINARY(16)")
     val userId: UUID,
@@ -32,13 +32,22 @@ class Post(
     val date: LocalDateTime,
 
     @Column(name = "school_id")
-    val schoolId: Int?,
+    var schoolId: Int?,
 
     @Column(name = "key_word")
-    val keyWord: String?,
+    var keyWord: String?,
 
-    val image: String?
+    var image: String?
 ) {
+    fun update(title: String, content: String, schoolId: Int? = null, keyWord: String? = null, image: String?): Post {
+        this.title = title
+        this.content = content
+        this.schoolId = schoolId
+        this.keyWord = keyWord
+        this.image = image
+        return this
+    }
+
     fun addGood() {
         this.good += 1
     }

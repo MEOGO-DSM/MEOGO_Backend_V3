@@ -1,14 +1,16 @@
-package org.meogo.domain.post.present
+package org.meogo.domain.post.presentation
 
 import lombok.RequiredArgsConstructor
-import org.meogo.domain.post.present.dto.request.PostRequest
+import org.meogo.domain.post.presentation.dto.request.PostRequest
 import org.meogo.domain.post.service.CreatePostService
 import org.meogo.domain.post.service.DeletePostService
+import org.meogo.domain.post.service.ModifyPostService
 import org.meogo.domain.post.service.QueryAllPostService
 import org.meogo.domain.post.service.QuerySchoolPostService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -25,7 +27,8 @@ class PostController(
     private val createPostService: CreatePostService,
     private val queryAllPostService: QueryAllPostService,
     private val querySchoolPostService: QuerySchoolPostService,
-    private val deletePostService: DeletePostService
+    private val deletePostService: DeletePostService,
+    private val modifyPostService: ModifyPostService
 ) {
 
     @PostMapping
@@ -42,6 +45,15 @@ class PostController(
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@RequestParam("post_id") id: Long) =
         deletePostService.execute(id)
+
+    @PatchMapping("/modify")
+    fun modify(
+        @RequestParam("post_id") id: Long,
+        @Valid
+        @RequestPart("request")
+        request: PostRequest,
+        @RequestPart("image") image: MultipartFile?
+    ) = modifyPostService.execute(id, request, image)
 
     @GetMapping("/query/all")
     fun queryAll() = queryAllPostService.execute()
