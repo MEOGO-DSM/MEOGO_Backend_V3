@@ -21,6 +21,9 @@ class QueryAllPostService(
                 post,
                 fileUtil
             )
-        }.sortedByDescending { it.id }
+        }.sortedWith(
+            compareByDescending<PostResponse> { it.good }
+                .thenByDescending { it.id }
+        )
     }
 }
