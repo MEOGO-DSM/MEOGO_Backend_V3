@@ -24,7 +24,7 @@ class CreateReviewService(
     fun execute(request: ReviewRequest, image: List<MultipartFile>?) {
         val user = userFacade.currentUser() ?: throw UserNotFoundException
 
-        if (request.star > 5.0 || request.star < 0.0) throw InvalidStarRangeException
+        if (request.star > 5 || request.star < 0) throw InvalidStarRangeException
 
         val keyWord = request.keyWord?.joinToString(separator = ",")
         val imageUrls = image?.joinToString(separator = ",") {

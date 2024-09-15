@@ -5,6 +5,6 @@ import javax.validation.constraints.Size
 data class ModifyReviewRequest(
     @field:Size(min = 1, max = 300)
     val content: String,
-    val star: Float,
+    val star: Int,
     val image: List<String>?
 )

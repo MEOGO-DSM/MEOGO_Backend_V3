@@ -26,7 +26,7 @@ class Review(
     val schoolId: Int,
 
     @Column(nullable = false)
-    var star: Float,
+    var star: Int,
 
     @Column(nullable = false)
     var content: String,
@@ -39,7 +39,7 @@ class Review(
 ) {
     fun updateReview(
         content: String,
-        star: Float,
+        star: Int,
         picture: String?
     ): Review {
         this.content = content

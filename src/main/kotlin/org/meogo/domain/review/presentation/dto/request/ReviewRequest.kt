@@ -6,6 +6,6 @@ data class ReviewRequest(
     @field:Size(min = 1, max = 300)
     val content: String,
     val schoolId: Int,
-    val star: Float,
+    val star: Int,
     val keyWord: List<String>?
 )
