@@ -16,6 +16,8 @@ enum class ErrorCode(
     REVIEW_NOT_FOUND(404, "Review not found"),
     POST_NOT_FOUND(404, "Post not found"),
 
+    ALREADY_WRITE_EXCEPTION(409, "You have already submitted a review"),
+
     // Internal Server Error
     INTERNAL_SERVER_ERROR(500, "Internal Server Error")
 }
