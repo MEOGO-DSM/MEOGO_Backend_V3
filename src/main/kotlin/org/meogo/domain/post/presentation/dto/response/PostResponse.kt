@@ -12,7 +12,8 @@ data class PostResponse(
     val date: String,
     val keyWord: List<String>?,
     val schoolId: Int?,
-    val image: String?
+    val image: String?,
+    val good: Int
 ) {
     constructor(
         post: Post,
@@ -25,6 +26,7 @@ data class PostResponse(
         post.format(post.date),
         post.keyWord?.split(",")?.map { it.trim() } ?: emptyList(),
         post.schoolId,
-        post.image?.let { fileUtil.generateObjectUrl(it, Path.COMMUNITY) }
+        post.image?.let { fileUtil.generateObjectUrl(it, Path.COMMUNITY) },
+        post.good
     )
 }

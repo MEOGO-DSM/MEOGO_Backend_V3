@@ -12,5 +12,7 @@ interface ReviewRepository : Repository<Review, Long> {
 
     fun findByUserId(userId: UUID): List<Review>?
 
+    fun existsByUserId(userId: UUID): Boolean
+
     fun deleteById(id: Long)
 }

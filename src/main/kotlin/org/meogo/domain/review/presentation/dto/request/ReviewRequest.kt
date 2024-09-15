@@ -7,5 +7,5 @@ data class ReviewRequest(
     val content: String,
     val schoolId: Int,
     val star: Int,
-    val keyWord: List<String>?
+    val keyWord: List<String>
 )

@@ -32,7 +32,7 @@ class Review(
     var content: String,
 
     @Column(name = "key_word")
-    val keyWord: String?,
+    val keyWord: String,
 
     var picture: String?
 
