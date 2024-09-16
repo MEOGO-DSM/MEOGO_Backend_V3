@@ -15,6 +15,7 @@ enum class ErrorCode(
     USER_NOT_FOUND(404, "User not found"),
     REVIEW_NOT_FOUND(404, "Review not found"),
     POST_NOT_FOUND(404, "Post not found"),
+    COMMENT_NOT_FOUND(404, "Comment not found"),
 
     ALREADY_WRITE_EXCEPTION(409, "You have already submitted a review"),
 
