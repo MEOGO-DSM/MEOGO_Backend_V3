@@ -15,10 +15,11 @@ class DeleteCommentService(
     @Transactional
     fun execute(commentId: Long) {
         val user = userFacade.currentUser()!!
-        val comment = commentRepository.findById(commentId)?: throw CommentNotFoundException
+        val comment = commentRepository.findById(commentId) ?: throw CommentNotFoundException
 
-        if(user.id != comment.user.id)
+        if (user.id != comment.user.id) {
             throw UserMisMatchException
+        }
 
         commentRepository.deleteById(comment.id)
     }
