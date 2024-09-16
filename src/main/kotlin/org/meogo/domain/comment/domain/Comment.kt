@@ -15,7 +15,6 @@ import javax.persistence.ManyToOne
 
 @Entity
 class Comment(
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     val id: Long = 0,
@@ -33,5 +32,4 @@ class Comment(
     @ManyToOne(cascade = [REMOVE], fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     val user: User
-
 )
