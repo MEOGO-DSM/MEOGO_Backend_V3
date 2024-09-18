@@ -31,7 +31,7 @@ class CreatePostService(
             Post(
                 title = request.title,
                 content = request.content,
-                userId = user.id!!,
+                user = user!!,
                 date = LocalDateTime.now(),
                 schoolId = schoolId,
                 keyWord = keyWord,

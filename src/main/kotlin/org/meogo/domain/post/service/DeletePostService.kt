@@ -16,7 +16,7 @@ class DeletePostService(
     fun execute(postId: Long) {
         val user = userFacade.currentUser()
         val post = postRepository.findById(postId) ?: throw PostNotFoundException
-        if (user!!.id != post.userId) throw UserMisMatchException
+        if (user!!.id != post.user.id) throw UserMisMatchException
 
         postRepository.deleteById(post.id)
     }
