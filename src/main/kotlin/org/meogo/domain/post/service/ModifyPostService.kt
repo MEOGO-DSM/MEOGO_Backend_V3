@@ -22,7 +22,7 @@ class ModifyPostService(
         val user = userFacade.currentUser()
         val post = postRepository.findById(postId) ?: throw PostNotFoundException
 
-        if (user!!.id != post.userId) throw UserMisMatchException
+        if (user!!.id != post.user.id) throw UserMisMatchException
 
         val updateImage = handleImage(post.image, image)
         val schoolId = if (!request.isOk || user.enrolledSchool == null) null else user.enrolledSchool

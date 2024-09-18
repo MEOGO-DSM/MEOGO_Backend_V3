@@ -3,11 +3,18 @@ package org.meogo.domain.post.domain
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.UUID
+import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
+import javax.persistence.OneToMany
+import org.meogo.domain.comment.domain.Comment
+import org.meogo.domain.user.domain.User
 
 @Entity
 class Post(
@@ -22,8 +29,9 @@ class Post(
     @Column(nullable = false)
     var content: String,
 
-    @Column(name = "user_id", columnDefinition = "BINARY(16)")
-    val userId: UUID,
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    val user: User,
 
     @Column(nullable = false)
     var good: Int = 0,
@@ -37,7 +45,10 @@ class Post(
     @Column(name = "key_word")
     var keyWord: String?,
 
-    var image: String?
+    var image: String?,
+
+    @OneToMany(mappedBy = "post", cascade = [CascadeType.ALL], orphanRemoval = true)
+    val comments: List<Comment> = emptyList()
 ) {
     fun update(title: String, content: String, schoolId: Int? = null, keyWord: String? = null, image: String?): Post {
         this.title = title

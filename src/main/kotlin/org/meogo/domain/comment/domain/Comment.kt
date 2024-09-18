@@ -3,6 +3,7 @@ package org.meogo.domain.comment.domain
 import org.meogo.domain.post.domain.Post
 import org.meogo.domain.user.domain.User
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.FetchType
@@ -31,4 +32,7 @@ class Comment(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     val user: User
-)
+) {
+    fun format(date: LocalDateTime) = date.format(DateTimeFormatter.ofPattern("yy.MM.dd HH:mm"))!!
+}
+

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
 import javax.validation.Valid
+import org.meogo.domain.post.presentation.dto.response.PostDetailResponse
+import org.meogo.domain.post.service.QueryPostDetailService
 
 @RequiredArgsConstructor
 @RestController
@@ -28,7 +30,8 @@ class PostController(
     private val queryAllPostService: QueryAllPostService,
     private val querySchoolPostService: QuerySchoolPostService,
     private val deletePostService: DeletePostService,
-    private val modifyPostService: ModifyPostService
+    private val modifyPostService: ModifyPostService,
+    private val queryPostDetailService: QueryPostDetailService
 ) {
 
     @PostMapping
@@ -60,4 +63,8 @@ class PostController(
 
     @GetMapping("/query")
     fun querySchool(@RequestParam(name = "school_id") schoolId: Int) = querySchoolPostService.execute(schoolId)
+
+    @GetMapping("/query/detail")
+    fun queryPostDetail(@RequestParam(name = "post_id") id: Long) =
+        queryPostDetailService.execute(id)
 }
