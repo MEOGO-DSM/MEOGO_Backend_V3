@@ -36,7 +36,7 @@ class CreateReviewService(
         reviewRepository.save(
             Review(
                 date = LocalDateTime.now(),
-                userId = user.id!!,
+                userId = user.id,
                 schoolId = request.schoolId,
                 star = request.star,
                 content = request.content,
