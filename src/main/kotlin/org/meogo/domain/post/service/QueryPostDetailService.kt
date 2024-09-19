@@ -1,6 +1,5 @@
 package org.meogo.domain.post.service
 
-import java.time.format.DateTimeFormatter
 import org.meogo.domain.comment.domain.CommentRepository
 import org.meogo.domain.comment.presentation.dto.response.CommentResponse
 import org.meogo.domain.comment.presentation.dto.response.ContentListResponse
@@ -10,7 +9,6 @@ import org.meogo.domain.post.presentation.dto.response.PostDetailResponse
 import org.meogo.domain.user.facade.UserFacade
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-
 
 @Service
 class QueryPostDetailService(

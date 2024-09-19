@@ -6,6 +6,7 @@ import org.meogo.domain.post.service.CreatePostService
 import org.meogo.domain.post.service.DeletePostService
 import org.meogo.domain.post.service.ModifyPostService
 import org.meogo.domain.post.service.QueryAllPostService
+import org.meogo.domain.post.service.QueryPostDetailService
 import org.meogo.domain.post.service.QuerySchoolPostService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -19,8 +20,6 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
 import javax.validation.Valid
-import org.meogo.domain.post.presentation.dto.response.PostDetailResponse
-import org.meogo.domain.post.service.QueryPostDetailService
 
 @RequiredArgsConstructor
 @RestController

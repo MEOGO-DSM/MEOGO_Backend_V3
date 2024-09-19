@@ -1,8 +1,9 @@
 package org.meogo.domain.post.domain
 
+import org.meogo.domain.comment.domain.Comment
+import org.meogo.domain.user.domain.User
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.UUID
 import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -13,8 +14,6 @@ import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
 import javax.persistence.OneToMany
-import org.meogo.domain.comment.domain.Comment
-import org.meogo.domain.user.domain.User
 
 @Entity
 class Post(

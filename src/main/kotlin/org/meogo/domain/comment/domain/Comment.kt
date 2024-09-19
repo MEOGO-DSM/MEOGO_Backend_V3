@@ -35,4 +35,3 @@ class Comment(
 ) {
     fun format(date: LocalDateTime) = date.format(DateTimeFormatter.ofPattern("yy.MM.dd HH:mm"))!!
 }
-

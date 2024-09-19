@@ -1,10 +1,6 @@
 package org.meogo.domain.comment.presentation.dto.response
 
 import org.meogo.domain.comment.domain.Comment
-import org.meogo.domain.post.domain.Post
-import org.meogo.global.s3.FileUtil
-import org.meogo.global.s3.Path
-
 
 data class ContentListResponse(
     val count: Int = 0,
@@ -16,9 +12,9 @@ data class CommentResponse(
     val accountId: String,
     val date: String,
     val content: String
-){
+) {
     constructor(
-        comment: Comment,
+        comment: Comment
     ) : this(
         id = comment.id,
         accountId = comment.user.accountId,
