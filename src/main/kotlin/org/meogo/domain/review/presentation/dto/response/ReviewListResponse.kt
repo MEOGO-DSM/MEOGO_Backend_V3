@@ -10,6 +10,7 @@ data class ReviewResponse(
     val content: String,
     val date: String,
     val userName: String,
-    val star: Int,
+    val profile: String,
+    val star: Float,
     val image: List<String>?
 )

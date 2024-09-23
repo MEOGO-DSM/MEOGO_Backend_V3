@@ -23,7 +23,8 @@ class QueryAllBySchoolIdService(
         return ReviewListResponse(
             count = reviews.size,
             reviews = reviews.map { review ->
-                val userName = userFacade.getUserById(review.userId).name
+                val user = userFacade.getUserById(review.userId)
+                val profile = fileUtil.generateObjectUrl(user.profile, Path.USER)
                 val image = review.picture?.split(",")?.map { pic ->
                     fileUtil.generateObjectUrl(pic.trim(), Path.REVIEW)
                 } ?: emptyList()
@@ -31,8 +32,9 @@ class QueryAllBySchoolIdService(
                     id = review.id,
                     content = review.content,
                     date = review.format(review.date),
-                    userName = userName,
-                    star = review.star,
+                    userName = user.name,
+                    profile = profile,
+                    star = review.star.toFloat(),
                     image = image
                 )
             }.sortedByDescending { it.id }
