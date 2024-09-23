@@ -6,6 +6,7 @@ import org.meogo.domain.post.service.CreatePostService
 import org.meogo.domain.post.service.DeletePostService
 import org.meogo.domain.post.service.ModifyPostService
 import org.meogo.domain.post.service.QueryAllPostService
+import org.meogo.domain.post.service.QueryMyPostService
 import org.meogo.domain.post.service.QueryPostDetailService
 import org.meogo.domain.post.service.QuerySchoolPostService
 import org.springframework.http.HttpStatus
@@ -30,7 +31,8 @@ class PostController(
     private val querySchoolPostService: QuerySchoolPostService,
     private val deletePostService: DeletePostService,
     private val modifyPostService: ModifyPostService,
-    private val queryPostDetailService: QueryPostDetailService
+    private val queryPostDetailService: QueryPostDetailService,
+    private val queryMyPostService: QueryMyPostService
 ) {
 
     @PostMapping
@@ -66,4 +68,7 @@ class PostController(
     @GetMapping("/query/detail")
     fun queryPostDetail(@RequestParam(name = "post_id") id: Long) =
         queryPostDetailService.execute(id)
+
+    @GetMapping("/query/my")
+    fun queryMyPosts() = queryMyPostService.execute()
 }

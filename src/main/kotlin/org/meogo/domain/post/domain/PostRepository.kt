@@ -1,6 +1,7 @@
 package org.meogo.domain.post.domain
 
 import org.springframework.data.repository.Repository
+import java.util.UUID
 
 interface PostRepository : Repository<Post, Long> {
 
@@ -12,5 +13,7 @@ interface PostRepository : Repository<Post, Long> {
 
     fun findById(id: Long): Post?
 
-    fun findBySchoolId(schoolId: Int): List<Post>
+    fun findByUserId(userId: UUID): List<Post>
+
+    fun findBySchoolId(schoolId: Int): List<Post>?
 }
