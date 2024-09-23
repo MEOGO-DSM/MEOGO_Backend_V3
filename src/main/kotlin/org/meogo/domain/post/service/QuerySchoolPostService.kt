@@ -13,8 +13,8 @@ class QuerySchoolPostService(
 ) {
 
     @Transactional(readOnly = true)
-    fun execute(schoolId: Int): List<PostResponse> {
-        val posts = postRepository.findBySchoolId(schoolId)
+    fun execute(schoolId: Int): List<PostResponse>? {
+        val posts = postRepository.findBySchoolId(schoolId) ?: emptyList()
 
         return posts.map { post ->
             PostResponse(
