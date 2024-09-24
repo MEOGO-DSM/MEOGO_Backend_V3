@@ -2,8 +2,8 @@ package org.meogo.domain.review.service
 
 import org.meogo.domain.review.domain.Review
 import org.meogo.domain.review.domain.ReviewRepository
+import org.meogo.domain.review.enum.KeyWord
 import org.meogo.domain.review.exception.AlreadyWriteException
-import org.meogo.domain.review.exception.InvalidStarRangeException
 import org.meogo.domain.review.presentation.dto.request.ReviewRequest
 import org.meogo.domain.user.exception.UserNotFoundException
 import org.meogo.domain.user.facade.UserFacade
@@ -26,9 +26,9 @@ class CreateReviewService(
         val user = userFacade.currentUser() ?: throw UserNotFoundException
 
         if (reviewRepository.existsByUserId(user.id!!)) throw AlreadyWriteException
-        if (request.star > 5 || request.star < 0) throw InvalidStarRangeException
 
         val keyWord = request.keyWord.joinToString(separator = ",")
+        KeyWord.entries.find { it.keyword == keyWord } ?: throw TODO()
         val imageUrls = image?.joinToString(separator = ",") {
             fileUtil.upload(it, Path.REVIEW)
         }
