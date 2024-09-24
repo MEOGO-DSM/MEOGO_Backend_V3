@@ -8,6 +8,7 @@ import org.meogo.domain.review.service.DeleteReviewService
 import org.meogo.domain.review.service.ModifyReviewService
 import org.meogo.domain.review.service.QueryAllBySchoolIdService
 import org.meogo.domain.review.service.QueryReviewPictureService
+import org.meogo.domain.review.service.QuerySchoolReviewResultService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -30,7 +31,8 @@ class ReviewController(
     private val queryAllBySchoolIdService: QueryAllBySchoolIdService,
     private val modifyReviewService: ModifyReviewService,
     private val deleteReviewService: DeleteReviewService,
-    private val queryReviewPictureService: QueryReviewPictureService
+    private val queryReviewPictureService: QueryReviewPictureService,
+    private val querySchoolReviewResultService: QuerySchoolReviewResultService
 ) {
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
@@ -58,4 +60,7 @@ class ReviewController(
     @GetMapping("/pic")
     fun queryReviewPicture(@RequestParam(name = "school_id") schoolId: Int) =
         queryReviewPictureService.queryReviewPicture(schoolId)
+
+    @GetMapping("/query/result")
+    fun querySchoolReviewResult(@RequestParam(name = "school_id") schoolId: Int) = querySchoolReviewResultService.execute(schoolId)
 }
