@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor
 import org.meogo.domain.question.presentation.dto.request.ModifyQuestionRequest
 import org.meogo.domain.question.presentation.dto.request.QuestionRequest
 import org.meogo.domain.question.service.CreateQuestionService
+import org.meogo.domain.question.service.DeleteQuestionService
 import org.meogo.domain.question.service.ModifyQuestionService
 import org.meogo.domain.question.service.QuerySchoolQuestionService
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -23,7 +25,8 @@ import javax.validation.Valid
 class QuestionController(
     private val createQuestionService: CreateQuestionService,
     private val querySchoolQuestionService: QuerySchoolQuestionService,
-    private val modifyQuestionService: ModifyQuestionService
+    private val modifyQuestionService: ModifyQuestionService,
+    private val deleteQuestionService: DeleteQuestionService
 ) {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
@@ -44,4 +47,9 @@ class QuestionController(
     @GetMapping("/query")
     fun querySchoolQuestion(@RequestParam(name = "school_id")schoolId: Int) =
         querySchoolQuestionService.execute(schoolId)
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/delete")
+    fun deleteQuestion(@RequestParam(name = "question_id")questionId: Long) =
+        deleteQuestionService.execute(questionId)
 }

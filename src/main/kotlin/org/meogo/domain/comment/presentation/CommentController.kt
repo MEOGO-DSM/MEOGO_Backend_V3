@@ -28,7 +28,7 @@ class CommentController(
         request: CommentRequest
     ) = createCommentService.execute(request)
 
-    @DeleteMapping
+    @DeleteMapping("/delete")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@RequestParam(name = "comment_id")id: Long) =
         deleteCommentService.execute(id)
