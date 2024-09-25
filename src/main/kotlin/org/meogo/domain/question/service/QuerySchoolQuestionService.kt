@@ -22,6 +22,6 @@ class QuerySchoolQuestionService(
                 questionType = question.questionType,
                 name = question.user.accountId
             )
-        } ?: emptyList()
+        }?.sortedByDescending { it.id } ?: emptyList()
     }
 }
