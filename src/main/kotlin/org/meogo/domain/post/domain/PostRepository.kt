@@ -11,9 +11,9 @@ interface PostRepository : Repository<Post, Long> {
 
     fun findAll(): List<Post>
 
-    fun findById(id: Long): Post?
+    fun findById(id: Long): Post
 
     fun findByUserId(userId: UUID): List<Post>
 
-    fun findBySchoolId(schoolId: Int): List<Post>?
+    fun findBySchoolId(schoolId: Int): List<Post>
 }
