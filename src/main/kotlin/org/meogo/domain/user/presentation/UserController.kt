@@ -1,6 +1,5 @@
 package org.meogo.domain.user.presentation
 
-import lombok.RequiredArgsConstructor
 import org.meogo.domain.user.presentation.dto.request.UserCheckRequest
 import org.meogo.domain.user.presentation.dto.request.UserSignInRequest
 import org.meogo.domain.user.presentation.dto.request.UserSignUpRequest
@@ -24,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile
 import javax.validation.Valid
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/user")
 class UserController(
     private val userSignUpService: UserSignUpService,

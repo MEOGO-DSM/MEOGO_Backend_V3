@@ -19,9 +19,10 @@ class QueryReviewPictureService(
 
         val pictures = reviews
             .flatMap { review ->
+                val year = review.date.year
                 review.picture?.split(",")?.map { pic ->
                     val pictureUrl = fileUtil.generateObjectUrl(pic.trim(), Path.REVIEW)
-                    ReviewPictureResponse(pictureUrl)
+                    ReviewPictureResponse(year, pictureUrl)
                 } ?: emptyList()
             }
 
