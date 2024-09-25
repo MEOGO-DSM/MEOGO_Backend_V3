@@ -32,11 +32,17 @@ class Question(
 
     @Enumerated(EnumType.STRING)
     @Column(name = "question_type", nullable = false)
-    val questionType: QuestionType,
+    var questionType: QuestionType,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     val user: User
 ) {
+    fun modify(content: String, questionType: QuestionType): Question {
+        this.content = content
+        this.questionType = questionType
+        return this
+    }
+
     fun format(date: LocalDateTime) = date.format(DateTimeFormatter.ofPattern("yy.MM.dd HH:mm"))!!
 }
