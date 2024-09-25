@@ -8,5 +8,5 @@ data class ModifyReviewRequest(
     val content: String,
     @field:Range(min = 1, max = 5)
     val star: Int,
-    val image: List<String>?
+    val keyWord: List<String>
 )

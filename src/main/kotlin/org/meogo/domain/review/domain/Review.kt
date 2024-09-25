@@ -40,6 +40,7 @@ class Review(
     fun updateReview(
         content: String,
         star: Int,
+        keyWord: String,
         picture: String?
     ): Review {
         this.content = content

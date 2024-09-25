@@ -49,10 +49,14 @@ class ReviewController(
         queryAllBySchoolIdService.queryAllBySchoolId(schoolId)
 
     @PatchMapping("/modify")
-    fun modify(@RequestParam(name = "review_id") reviewId: Long, @RequestBody request: ModifyReviewRequest) =
+    fun modify(
+        @RequestParam(name = "review_id") reviewId: Long,
+        @RequestBody request: ModifyReviewRequest,
+        @RequestPart("image") images: List<MultipartFile>?
+    ) =
         modifyReviewService.modifyReview(reviewId, request)
 
-    @DeleteMapping()
+    @DeleteMapping
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     fun delete(@RequestParam(name = "review_id") reviewId: Long) =
         deleteReviewService.deleteReview(reviewId)

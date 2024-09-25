@@ -28,8 +28,10 @@ class CreateReviewService(
 
         if (reviewRepository.existsByUserId(user.id!!)) throw AlreadyWriteException
 
-        val keyWord = request.keyWord.joinToString(separator = ",")
-        KeyWord.entries.find { it.keyword == keyWord } ?: throw KeyWordNotFoundException
+        request.keyWord.forEach { keyWord ->
+            if (KeyWord.entries.none { it.keyword == keyWord }) throw KeyWordNotFoundException
+        }
+
         val imageUrls = image?.joinToString(separator = ",") {
             fileUtil.upload(it, Path.REVIEW)
         }
@@ -41,7 +43,7 @@ class CreateReviewService(
                 schoolId = request.schoolId,
                 star = request.star,
                 content = request.content,
-                keyWord = keyWord,
+                keyWord = request.keyWord.joinToString(separator = ","),
                 picture = imageUrls
             )
         )
