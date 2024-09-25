@@ -1,6 +1,5 @@
 package org.meogo.domain.review.presentation
 
-import lombok.RequiredArgsConstructor
 import org.meogo.domain.review.presentation.dto.request.ModifyReviewRequest
 import org.meogo.domain.review.presentation.dto.request.ReviewRequest
 import org.meogo.domain.review.service.CreateReviewService
@@ -25,7 +24,6 @@ import org.springframework.web.multipart.MultipartFile
 import javax.validation.Valid
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/review")
 class ReviewController(
     private val createReviewService: CreateReviewService,
@@ -54,7 +52,7 @@ class ReviewController(
     fun modify(@RequestParam(name = "review_id") reviewId: Long, @RequestBody request: ModifyReviewRequest) =
         modifyReviewService.modifyReview(reviewId, request)
 
-    @DeleteMapping("/delete")
+    @DeleteMapping()
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     fun delete(@RequestParam(name = "review_id") reviewId: Long) =
         deleteReviewService.deleteReview(reviewId)

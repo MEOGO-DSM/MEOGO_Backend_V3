@@ -45,7 +45,7 @@ class PostController(
     ) =
         createPostService.execute(request, image)
 
-    @DeleteMapping("/delete")
+    @DeleteMapping()
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@RequestParam("post_id") id: Long) =
         deletePostService.execute(id)

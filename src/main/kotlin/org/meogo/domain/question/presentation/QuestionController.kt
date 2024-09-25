@@ -1,6 +1,5 @@
 package org.meogo.domain.question.presentation
 
-import lombok.RequiredArgsConstructor
 import org.meogo.domain.question.presentation.dto.request.ModifyQuestionRequest
 import org.meogo.domain.question.presentation.dto.request.QuestionRequest
 import org.meogo.domain.question.service.CreateQuestionService
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/question")
 class QuestionController(
@@ -49,7 +47,7 @@ class QuestionController(
         querySchoolQuestionService.execute(schoolId)
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/delete")
+    @DeleteMapping()
     fun deleteQuestion(@RequestParam(name = "question_id")questionId: Long) =
         deleteQuestionService.execute(questionId)
 }

@@ -1,6 +1,5 @@
 package org.meogo.domain.comment.presentation
 
-import lombok.RequiredArgsConstructor
 import org.meogo.domain.comment.presentation.dto.request.CommentRequest
 import org.meogo.domain.comment.service.CreateCommentService
 import org.meogo.domain.comment.service.DeleteCommentService
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/comment")
 class CommentController(
@@ -28,7 +26,7 @@ class CommentController(
         request: CommentRequest
     ) = createCommentService.execute(request)
 
-    @DeleteMapping("/delete")
+    @DeleteMapping()
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@RequestParam(name = "comment_id")id: Long) =
         deleteCommentService.execute(id)
