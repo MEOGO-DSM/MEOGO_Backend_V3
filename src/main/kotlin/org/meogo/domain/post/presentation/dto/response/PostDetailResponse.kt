@@ -1,6 +1,6 @@
 package org.meogo.domain.post.presentation.dto.response
 
-import org.meogo.domain.comment.presentation.dto.response.ContentListResponse
+import org.meogo.domain.comment.presentation.dto.response.CommentListResponse
 
 data class PostDetailResponse(
     val id: Long,
@@ -12,5 +12,5 @@ data class PostDetailResponse(
     val schoolId: Int?,
     val image: String?,
     val good: Int,
-    val comments: ContentListResponse
+    val comments: CommentListResponse
 )

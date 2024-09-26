@@ -10,5 +10,7 @@ interface CommentRepository : Repository<Comment, Long> {
 
     fun deleteById(id: Long)
 
-    fun findByPost(post: Post): List<Comment>
+    fun findAllByPost(post: Post): List<Comment>
+
+    fun findAllByComment(comment: Comment): List<Comment>
 }

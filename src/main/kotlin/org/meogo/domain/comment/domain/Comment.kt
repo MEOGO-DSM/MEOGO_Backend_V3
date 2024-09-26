@@ -6,6 +6,7 @@ import org.meogo.domain.question.domain.Question
 import org.meogo.domain.user.domain.User
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.EnumType
@@ -16,6 +17,7 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
+import javax.persistence.OneToMany
 
 @Entity
 class Comment(
@@ -36,6 +38,9 @@ class Comment(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comment_id", nullable = true)
     val comment: Comment? = null,
+
+    @OneToMany(mappedBy = "commentType", cascade = [CascadeType.ALL], orphanRemoval = true)
+    val replies: List<Comment> = emptyList(),
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id", nullable = true)
