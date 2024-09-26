@@ -21,7 +21,7 @@ class QueryMyPostService(
 
         return posts.map {
                 post ->
-            val comment = commentRepository.findByPost(post).count()
+            val comment = commentRepository.findAllByPost(post).count()
             QueryMyPostResponse(
                 id = post.id,
                 title = post.title,

@@ -54,7 +54,7 @@ class ReviewController(
         @RequestBody request: ModifyReviewRequest,
         @RequestPart("image") images: List<MultipartFile>?
     ) =
-        modifyReviewService.modifyReview(reviewId, request)
+        modifyReviewService.modifyReview(reviewId, request, images)
 
     @DeleteMapping
     @ResponseStatus(value = HttpStatus.NO_CONTENT)

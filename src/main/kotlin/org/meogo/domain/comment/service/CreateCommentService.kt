@@ -32,7 +32,6 @@ class CreateCommentService(
             CommentType.COMMENT -> commentRepository.findById(request.id)
         }
 
-        // 댓글 저장
         val comment = Comment(
             content = request.content,
             date = LocalDateTime.now(),
