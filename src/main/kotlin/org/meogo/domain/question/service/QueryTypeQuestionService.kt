@@ -21,7 +21,7 @@ class QueryTypeQuestionService(
                 content = question.content,
                 date = question.format(question.date),
                 questionType = question.questionType,
-                name = question.user.accountId
+                accountId = question.user.accountId
             )
         }
     }

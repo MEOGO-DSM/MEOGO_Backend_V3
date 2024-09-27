@@ -7,5 +7,5 @@ data class QueryQuestionResponse(
     val content: String,
     val date: String,
     val questionType: QuestionType,
-    val name: String
+    val accountId: String
 )
