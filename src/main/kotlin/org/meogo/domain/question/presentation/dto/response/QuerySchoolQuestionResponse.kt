@@ -2,7 +2,7 @@ package org.meogo.domain.question.presentation.dto.response
 
 import org.meogo.domain.question.enum.QuestionType
 
-data class QuerySchoolQuestionResponse(
+data class QueryQuestionResponse(
     val id: Long,
     val content: String,
     val date: String,
