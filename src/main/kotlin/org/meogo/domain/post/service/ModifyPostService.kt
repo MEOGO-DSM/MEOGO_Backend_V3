@@ -1,7 +1,6 @@
 package org.meogo.domain.post.service
 
 import org.meogo.domain.post.domain.PostRepository
-import org.meogo.domain.post.exception.PostNotFoundException
 import org.meogo.domain.post.presentation.dto.request.PostRequest
 import org.meogo.domain.user.exception.UserMisMatchException
 import org.meogo.domain.user.facade.UserFacade
@@ -20,7 +19,7 @@ class ModifyPostService(
     @Transactional
     fun execute(postId: Long, request: PostRequest, image: MultipartFile?) {
         val user = userFacade.currentUser()
-        val post = postRepository.findById(postId) ?: throw PostNotFoundException
+        val post = postRepository.findById(postId)
 
         if (user!!.id != post.user.id) throw UserMisMatchException
 

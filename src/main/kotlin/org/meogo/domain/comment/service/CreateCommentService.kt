@@ -13,7 +13,6 @@ import org.meogo.domain.user.facade.UserFacade
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
-
 @Service
 class CreateCommentService(
     private val commentRepository: CommentRepository,
@@ -26,7 +25,7 @@ class CreateCommentService(
     fun execute(request: CommentRequest) {
         val user = userFacade.currentUser() ?: throw UserNotFoundException
 
-        val rightEntity = when (request.commentType) {
+        val rightEntity: Any = when (request.commentType) {
             CommentType.POST -> postRepository.findById(request.id)
             CommentType.QUESTION -> questionRepository.findById(request.id)
             CommentType.COMMENT -> commentRepository.findById(request.id)
@@ -37,9 +36,9 @@ class CreateCommentService(
             date = LocalDateTime.now(),
             user = user,
             commentType = request.commentType,
-            post = if (request.commentType == CommentType.POST) rightEntity as Post else null,
-            question = if (request.commentType == CommentType.QUESTION) rightEntity as Question else null,
-            comment = if (request.commentType == CommentType.COMMENT) rightEntity as Comment else null
+            post = if (request.commentType == CommentType.POST) rightEntity as Post? else null,
+            question = if (request.commentType == CommentType.QUESTION) rightEntity as Question? else null,
+            comment = if (request.commentType == CommentType.COMMENT) rightEntity as Comment? else null
         )
 
         commentRepository.save(comment)

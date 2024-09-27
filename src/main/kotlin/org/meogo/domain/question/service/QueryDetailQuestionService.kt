@@ -1,24 +1,24 @@
-package org.meogo.domain.post.service
+package org.meogo.domain.question.service
 
 import org.meogo.domain.comment.domain.CommentRepository
 import org.meogo.domain.comment.presentation.dto.response.CommentListResponse
 import org.meogo.domain.comment.service.CommentService
-import org.meogo.domain.post.domain.PostRepository
-import org.meogo.domain.post.presentation.dto.response.PostDetailResponse
+import org.meogo.domain.question.domain.QuestionRepository
+import org.meogo.domain.question.presentation.dto.response.QuestionDetailResponse
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class QueryPostDetailService(
-    private val postRepository: PostRepository,
+class QueryDetailQuestionService(
+    private val questionRepository: QuestionRepository,
     private val commentRepository: CommentRepository,
     private val commentService: CommentService
 ) {
     @Transactional(readOnly = true)
-    fun execute(postId: Long): PostDetailResponse {
-        val post = postRepository.findById(postId)
+    fun execute(questionId: Long): QuestionDetailResponse {
+        val question = questionRepository.findById(questionId)
 
-        val basicComments = commentRepository.findAllByPost(post)
+        val basicComments = commentRepository.findAllByQuestion(question)
 
         val replies = commentService.getCommentResponses(basicComments)
 
@@ -27,16 +27,12 @@ class QueryPostDetailService(
             commentList = replies.sortedByDescending { it.date }
         )
 
-        return PostDetailResponse(
-            id = post.id,
-            name = "익명",
-            title = post.title,
-            content = post.content,
-            date = post.format(post.date),
-            keyWord = post.keyWord?.split(","),
-            schoolId = post.schoolId,
-            image = post.image,
-            good = post.good,
+        return QuestionDetailResponse(
+            id = questionId,
+            name = question.user.accountId,
+            date = question.format(question.date),
+            content = question.content,
+            tag = question.questionType,
             comments = contentListResponse
         )
     }
