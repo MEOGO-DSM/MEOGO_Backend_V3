@@ -1,7 +1,6 @@
 package org.meogo.domain.post.service
 
 import org.meogo.domain.post.domain.PostRepository
-import org.meogo.domain.post.exception.PostNotFoundException
 import org.meogo.domain.user.exception.UserMisMatchException
 import org.meogo.domain.user.facade.UserFacade
 import org.springframework.stereotype.Service
@@ -15,7 +14,7 @@ class DeletePostService(
     @Transactional
     fun execute(postId: Long) {
         val user = userFacade.currentUser()
-        val post = postRepository.findById(postId) ?: throw PostNotFoundException
+        val post = postRepository.findById(postId)
         if (user!!.id != post.user.id) throw UserMisMatchException
 
         postRepository.deleteById(post.id)
