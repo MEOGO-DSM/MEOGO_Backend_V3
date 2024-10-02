@@ -1,4 +1,4 @@
-package org.meogo.domain.bookmark
+package org.meogo.domain.bookmark.domain
 
 import org.meogo.domain.user.domain.User
 import org.meogo.global.base.BaseUUIDEntity
@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne
 class Bookmark(
     id: UUID? = null,
 
-    val schoolId: Int? = 0,
+    val schoolId: Int,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
