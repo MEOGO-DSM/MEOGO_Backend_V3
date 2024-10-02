@@ -62,5 +62,9 @@ class Post(
         this.good += 1
     }
 
+    fun deleteGood() {
+        this.good -= 1
+    }
+
     fun format(date: LocalDateTime) = date.format(DateTimeFormatter.ofPattern("yy.MM.dd HH:mm"))!!
 }
