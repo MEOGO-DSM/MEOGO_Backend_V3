@@ -19,8 +19,10 @@ enum class ErrorCode(
     KEYWORD_NOT_FOUND(404, "Keyword not found"),
     QUESTION_NOT_FOUND(404, "Question not found"),
     BOOKMARK_NOT_FOUND(404, "Bookmark not found"),
+    GOOD_NOT_FOUND(404, "Good Not found"),
 
     ALREADY_WRITE_EXCEPTION(409, "You have already submitted a review"),
+    ALREADY_GOOD_EXCEPTION(409, "You have already booked"),
 
     // Internal Server Error
     INTERNAL_SERVER_ERROR(500, "Internal Server Error")
