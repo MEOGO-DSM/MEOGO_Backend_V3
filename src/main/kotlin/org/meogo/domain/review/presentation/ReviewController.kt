@@ -7,6 +7,7 @@ import org.meogo.domain.review.service.DeleteReviewService
 import org.meogo.domain.review.service.ModifyReviewService
 import org.meogo.domain.review.service.QueryAllBySchoolIdService
 import org.meogo.domain.review.service.QueryKeywordsService
+import org.meogo.domain.review.service.QueryMatchService
 import org.meogo.domain.review.service.QueryReviewPictureService
 import org.meogo.domain.review.service.QuerySchoolReviewResultService
 import org.springframework.http.HttpStatus
@@ -32,7 +33,8 @@ class ReviewController(
     private val deleteReviewService: DeleteReviewService,
     private val queryReviewPictureService: QueryReviewPictureService,
     private val querySchoolReviewResultService: QuerySchoolReviewResultService,
-    private val queryKeywordsService: QueryKeywordsService
+    private val queryKeywordsService: QueryKeywordsService,
+    private val queryMatchService: QueryMatchService
 ) {
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
@@ -70,4 +72,8 @@ class ReviewController(
 
     @GetMapping("/keyword")
     fun queryKeyword() = queryKeywordsService.execute()
+
+    @GetMapping("/match")
+    fun schoolMatch(@RequestParam(name = "school_id") schoolId: Int) =
+        queryMatchService.execute(schoolId)
 }
