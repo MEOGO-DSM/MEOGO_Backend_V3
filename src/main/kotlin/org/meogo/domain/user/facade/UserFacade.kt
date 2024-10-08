@@ -16,9 +16,9 @@ class UserFacade(
         return accountId?.let { getUserByAccountId(it) }
     }
 
-    fun getUserByAccountId(accountId: String): User =
+    fun getUserByAccountId(accountId: String): User? =
         userRepository.findByAccountId(accountId)
 
-    fun getUserById(id: UUID): User =
+    fun getUserById(id: UUID): User? =
         userRepository.findById(id)
 }

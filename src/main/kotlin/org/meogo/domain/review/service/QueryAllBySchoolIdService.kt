@@ -3,6 +3,7 @@ package org.meogo.domain.review.service
 import org.meogo.domain.review.domain.ReviewRepository
 import org.meogo.domain.review.presentation.dto.response.ReviewListResponse
 import org.meogo.domain.review.presentation.dto.response.ReviewResponse
+import org.meogo.domain.user.exception.UserNotFoundException
 import org.meogo.domain.user.facade.UserFacade
 import org.meogo.global.s3.FileUtil
 import org.meogo.global.s3.Path
@@ -23,7 +24,7 @@ class QueryAllBySchoolIdService(
         return ReviewListResponse(
             count = reviews.size,
             reviews = reviews.map { review ->
-                val user = userFacade.getUserById(review.userId)
+                val user = userFacade.getUserById(review.userId) ?: throw UserNotFoundException
                 val profile = fileUtil.generateObjectUrl(user.profile, Path.USER)
                 val image = review.picture?.split(",")?.map { pic ->
                     fileUtil.generateObjectUrl(pic.trim(), Path.REVIEW)
