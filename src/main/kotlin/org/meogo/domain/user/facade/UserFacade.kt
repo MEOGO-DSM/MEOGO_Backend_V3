@@ -2,7 +2,6 @@ package org.meogo.domain.user.facade
 
 import org.meogo.domain.user.domain.User
 import org.meogo.domain.user.domain.UserRepository
-import org.meogo.domain.user.exception.UserNotFoundException
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 import java.util.UUID
@@ -18,8 +17,8 @@ class UserFacade(
     }
 
     fun getUserByAccountId(accountId: String): User =
-        userRepository.findByAccountId(accountId) ?: throw UserNotFoundException
+        userRepository.findByAccountId(accountId)
 
     fun getUserById(id: UUID): User =
-        userRepository.findById(id).orElseThrow { UserNotFoundException }
+        userRepository.findById(id)
 }
