@@ -12,7 +12,7 @@ class User(
     id: UUID? = null,
 
     @Column(nullable = false, length = 4)
-    val name: String,
+    var name: String,
 
     @Column(name = "account_id", nullable = false, length = 15, unique = true)
     val accountId: String,
@@ -20,15 +20,19 @@ class User(
     val password: String,
 
     @Column(name = "enrolled_school", nullable = true)
-    val enrolledSchool: Int? = 0,
+    var enrolledSchool: Int? = 0,
 
     var profile: String,
 
     @Enumerated(EnumType.STRING)
     val role: UserRole
 ) : BaseUUIDEntity(id) {
-    fun updateProfile(profile: String): User {
-        this.profile = profile
+    fun updateProfile(name: String, enrolledSchool: Int, profile: String?): User {
+        this.name = name
+        this.enrolledSchool = enrolledSchool
+        if (profile != null) {
+            this.profile = profile
+        }
         return this
     }
 }

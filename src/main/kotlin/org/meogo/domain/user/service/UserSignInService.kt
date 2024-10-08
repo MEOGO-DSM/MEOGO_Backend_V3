@@ -2,7 +2,6 @@ package org.meogo.domain.user.service
 
 import org.meogo.domain.user.domain.UserRepository
 import org.meogo.domain.user.exception.PasswordMismatchException
-import org.meogo.domain.user.exception.UserNotFoundException
 import org.meogo.domain.user.presentation.dto.request.UserSignInRequest
 import org.meogo.global.jwt.JwtTokenProvider
 import org.meogo.global.jwt.dto.TokenResponse
@@ -19,7 +18,6 @@ class UserSignInService(
     @Transactional
     fun execute(request: UserSignInRequest): TokenResponse {
         val user = userRepository.findByAccountId(request.accountId)
-            ?: throw UserNotFoundException
 
         if (!passwordEncoder.matches(request.password, user.password)) throw PasswordMismatchException
 
