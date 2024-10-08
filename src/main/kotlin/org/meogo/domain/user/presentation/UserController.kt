@@ -1,12 +1,13 @@
 package org.meogo.domain.user.presentation
 
 import org.meogo.domain.user.presentation.dto.request.UserCheckRequest
+import org.meogo.domain.user.presentation.dto.request.UserModifyRequest
 import org.meogo.domain.user.presentation.dto.request.UserSignInRequest
 import org.meogo.domain.user.presentation.dto.request.UserSignUpRequest
 import org.meogo.domain.user.presentation.dto.response.MyPageResponse
 import org.meogo.domain.user.service.CheckAccountIdService
-import org.meogo.domain.user.service.MyPageService
-import org.meogo.domain.user.service.UploadProfileService
+import org.meogo.domain.user.service.ModifyUserInfoService
+import org.meogo.domain.user.service.QueryMyPageService
 import org.meogo.domain.user.service.UserSignInService
 import org.meogo.domain.user.service.UserSignUpService
 import org.meogo.global.jwt.dto.TokenResponse
@@ -28,8 +29,8 @@ class UserController(
     private val userSignUpService: UserSignUpService,
     private val userSignInService: UserSignInService,
     private val userCheckAccountIdService: CheckAccountIdService,
-    private val myPageService: MyPageService,
-    private val uploadProfileService: UploadProfileService
+    private val queryMyPageService: QueryMyPageService,
+    private val modifyUserInfoService: ModifyUserInfoService
 ) {
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
@@ -49,9 +50,13 @@ class UserController(
 
     @GetMapping("/my")
     fun myPage(): MyPageResponse =
-        myPageService.execute()
+        queryMyPageService.execute()
 
-    @PatchMapping("/profile")
-    fun updateProfile(@RequestPart(name = "image") file: MultipartFile) =
-        uploadProfileService.uploadProfile(file)
+    @PatchMapping("/modify")
+    fun updateProfile(
+        @RequestPart(name = "image")
+        file: MultipartFile?,
+        @RequestPart(name = "request")
+        request: UserModifyRequest
+    ) = modifyUserInfoService.execute(request, file)
 }
