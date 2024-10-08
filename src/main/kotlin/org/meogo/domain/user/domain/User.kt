@@ -27,12 +27,10 @@ class User(
     @Enumerated(EnumType.STRING)
     val role: UserRole
 ) : BaseUUIDEntity(id) {
-    fun updateProfile(name: String, enrolledSchool: Int, profile: String?): User {
+    fun updateProfile(name: String, enrolledSchool: Int, profile: String): User {
         this.name = name
         this.enrolledSchool = enrolledSchool
-        if (profile != null) {
-            this.profile = profile
-        }
+        this.profile = profile
         return this
     }
 }
