@@ -24,7 +24,7 @@ class ModifyUserInfoService(
     fun execute(request: UserModifyRequest, file: MultipartFile?) {
         val user = userFacade.currentUser() ?: throw UserNotFoundException
 
-        if (user.profile != defaultImage) fileUtil.delete(user.profile, Path.USER)
+        if (file != null && user.profile != defaultImage) fileUtil.delete(user.profile, Path.USER)
         val url = file?.let { fileUtil.upload(it, Path.USER) }
 
         userRepository.save(
