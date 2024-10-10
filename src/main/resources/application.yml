@@ -40,7 +40,9 @@ cloud:
     stack:
       auto: false
 
+firebase:
+  url: ${FCM_URL}
+
 server:
   port: 8989
-
 

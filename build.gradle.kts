@@ -36,6 +36,7 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt:0.9.1")
     implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
     implementation("com.amazonaws:aws-java-sdk-s3:1.12.281")
+    implementation("com.google.firebase:firebase-admin:8.1.0")
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("com.mysql:mysql-connector-j")
     annotationProcessor("org.projectlombok:lombok")
