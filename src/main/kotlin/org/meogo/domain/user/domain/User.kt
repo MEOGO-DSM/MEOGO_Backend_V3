@@ -9,7 +9,7 @@ import javax.persistence.Enumerated
 
 @Entity
 data class User(
-    override val id: UUID? = null,
+    override val id: UUID,
 
     @Column(nullable = false, length = 4)
     var name: String,
@@ -27,7 +27,7 @@ data class User(
     @Enumerated(EnumType.STRING)
     val role: UserRole,
 
-    @Column(name = "device_token", nullable = false)
+    @Column(name = "device_token", nullable = true)
     val deviceToken: String? = null
 ) : BaseUUIDEntity(id) {
     fun updateProfile(name: String, enrolledSchool: Int, profile: String): User {
