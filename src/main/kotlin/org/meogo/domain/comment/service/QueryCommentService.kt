@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class CommentService(
+class QueryCommentService(
     private val commentRepository: CommentRepository
 ) {
     @Transactional(readOnly = true)
-    fun getCommentResponses(basicComments: List<Comment>): List<CommentResponse> {
+    fun execute(basicComments: List<Comment>): List<CommentResponse> {
         return basicComments.map { basicComment ->
             val replies = commentRepository.findAllByComment(basicComment)
             CommentResponse(basicComment, replies.map { CommentResponse(it) })
