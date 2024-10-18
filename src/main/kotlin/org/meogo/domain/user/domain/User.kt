@@ -1,7 +1,6 @@
 package org.meogo.domain.user.domain
 
 import org.meogo.global.base.BaseUUIDEntity
-import java.util.UUID
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.EnumType
@@ -9,8 +8,6 @@ import javax.persistence.Enumerated
 
 @Entity
 data class User(
-    override val id: UUID,
-
     @Column(nullable = false, length = 4)
     var name: String,
 
@@ -25,15 +22,20 @@ data class User(
     var profile: String,
 
     @Enumerated(EnumType.STRING)
-    val role: UserRole,
+    var role: UserRole,
 
     @Column(name = "device_token", nullable = true)
-    val deviceToken: String? = null
-) : BaseUUIDEntity(id) {
+    var deviceToken: String? = null
+) : BaseUUIDEntity() {
     fun updateProfile(name: String, enrolledSchool: Int, profile: String): User {
         this.name = name
         this.enrolledSchool = enrolledSchool
         this.profile = profile
+        return this
+    }
+
+    fun updateDeviceToken(deviceToken: String): User {
+        this.deviceToken = deviceToken
         return this
     }
 }
