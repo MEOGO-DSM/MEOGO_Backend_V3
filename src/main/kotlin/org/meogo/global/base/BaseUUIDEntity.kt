@@ -14,5 +14,5 @@ abstract class BaseUUIDEntity(
         columnDefinition = "BINARY(16)",
         nullable = false
     )
-    val id: UUID?
+    val id: UUID? = null
 )

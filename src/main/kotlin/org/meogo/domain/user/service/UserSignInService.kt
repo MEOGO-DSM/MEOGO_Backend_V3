@@ -21,6 +21,11 @@ class UserSignInService(
 
         if (!passwordEncoder.matches(request.password, user.password)) throw PasswordMismatchException
 
+        userRepository.save(
+            user.updateDeviceToken(
+                request.deviceToken
+            )
+        )
         return jwtTokenProvider.getToken(user.accountId)
     }
 }
