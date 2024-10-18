@@ -2,7 +2,7 @@ package org.meogo.domain.post.service
 
 import org.meogo.domain.comment.domain.CommentRepository
 import org.meogo.domain.comment.presentation.dto.response.CommentListResponse
-import org.meogo.domain.comment.service.CommentService
+import org.meogo.domain.comment.service.QueryCommentService
 import org.meogo.domain.post.domain.PostRepository
 import org.meogo.domain.post.presentation.dto.response.PostDetailResponse
 import org.springframework.stereotype.Service
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional
 class QueryPostDetailService(
     private val postRepository: PostRepository,
     private val commentRepository: CommentRepository,
-    private val commentService: CommentService
+    private val queryCommentService: QueryCommentService
 ) {
     @Transactional(readOnly = true)
     fun execute(postId: Long): PostDetailResponse {
@@ -20,7 +20,7 @@ class QueryPostDetailService(
 
         val basicComments = commentRepository.findAllByPost(post)
 
-        val replies = commentService.getCommentResponses(basicComments)
+        val replies = queryCommentService.execute(basicComments)
 
         val contentListResponse = CommentListResponse(
             count = replies.size + basicComments.size,
