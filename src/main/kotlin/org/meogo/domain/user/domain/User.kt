@@ -22,7 +22,7 @@ data class User(
     var profile: String,
 
     @Enumerated(EnumType.STRING)
-    var role: UserRole,
+    val role: UserRole,
 
     @Column(name = "device_token", nullable = true)
     var deviceToken: String? = null
