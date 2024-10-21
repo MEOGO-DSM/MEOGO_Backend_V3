@@ -1,5 +1,7 @@
 package org.meogo.domain.review.presentation
 
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.meogo.domain.review.presentation.dto.request.ModifyReviewRequest
 import org.meogo.domain.review.presentation.dto.request.ReviewRequest
 import org.meogo.domain.review.service.CreateReviewService
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
 import javax.validation.Valid
 
+@Tag(name = "Review API")
 @RestController
 @RequestMapping("/review")
 class ReviewController(
@@ -36,6 +39,7 @@ class ReviewController(
     private val queryKeywordsService: QueryKeywordsService,
     private val queryMatchService: QueryMatchService
 ) {
+    @Operation(summary = "리뷰 작성")
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     fun create(
@@ -46,10 +50,12 @@ class ReviewController(
     ) =
         createReviewService.execute(request, images)
 
+    @Operation(summary = "학교별 리뷰 조회")
     @GetMapping("/query")
     fun queryAllBySchoolId(@RequestParam(name = "school_id") schoolId: Int) =
         queryAllBySchoolIdService.queryAllBySchoolId(schoolId)
 
+    @Operation(summary = "리뷰 수정")
     @PatchMapping("/modify")
     fun modify(
         @RequestParam(name = "review_id") reviewId: Long,
@@ -58,21 +64,26 @@ class ReviewController(
     ) =
         modifyReviewService.modifyReview(reviewId, request, images)
 
+    @Operation(summary = "리뷰 삭제")
     @DeleteMapping
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     fun delete(@RequestParam(name = "review_id") reviewId: Long) =
         deleteReviewService.deleteReview(reviewId)
 
+    @Operation(summary = "학교별 리뷰 사진 조회")
     @GetMapping("/pic")
     fun queryReviewPicture(@RequestParam(name = "school_id") schoolId: Int) =
         queryReviewPictureService.queryReviewPicture(schoolId)
 
+    @Operation(summary = "라뷰 결과 조회")
     @GetMapping("/query/result")
     fun querySchoolReviewResult(@RequestParam(name = "school_id") schoolId: Int) = querySchoolReviewResultService.execute(schoolId)
 
+    @Operation(summary = "리뷰 키워드 반환")
     @GetMapping("/keyword")
     fun queryKeyword() = queryKeywordsService.execute()
 
+    @Operation(summary = "해당 학교인지 여부 반환")
     @GetMapping("/match")
     fun schoolMatch(@RequestParam(name = "school_id") schoolId: Int) =
         queryMatchService.execute(schoolId)

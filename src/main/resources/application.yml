@@ -1,4 +1,6 @@
 spring:
+  spring:
+    config.activate.on-profile: default
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${DB_URL}
@@ -9,7 +11,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: false
+    show-sql: true
     properties:
       hibernate:
         format_sql: true
@@ -42,6 +44,12 @@ cloud:
 
 firebase:
   url: ${FCM_URL}
+
+url:
+  career: ${CAREER_URL}
+
+open-feign:
+  career-key: ${CAREER_KEY}
 
 server:
   port: 8989
