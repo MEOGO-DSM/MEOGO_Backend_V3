@@ -5,10 +5,7 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Configuration
-import java.io.File
 import java.net.URL
-import java.nio.file.Files
-import java.nio.file.Paths
 import javax.annotation.PostConstruct
 
 @Configuration
@@ -20,15 +17,13 @@ class FcmConfig(
     fun initializeFirebaseApp() {
         try {
             if (FirebaseApp.getApps().isEmpty()) {
+                // URL에서 InputStream을 열고 FirebaseOptions를 초기화
                 URL(url).openStream().use { inputStream ->
-                    Files.copy(inputStream, Paths.get(PATH))
-                    val tempfile = File(PATH)
                     val options = FirebaseOptions.builder()
-                        .setCredentials(GoogleCredentials.fromStream(tempfile.inputStream()))
+                        // InputStream을 통해 인증 정보 설정
+                        .setCredentials(GoogleCredentials.fromStream(inputStream))
                         .build()
                     FirebaseApp.initializeApp(options)
-
-                    tempfile.delete()
                 }
             }
         } catch (e: Exception) {

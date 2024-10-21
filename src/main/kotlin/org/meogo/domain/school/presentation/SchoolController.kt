@@ -21,7 +21,7 @@ class SchoolController(
     fun getSchools(
         @RequestParam(name = "gubun")
         gubun: Gubun,
-        @RequestParam(name = "regoion")
+        @RequestParam(name = "region")
         region: String?,
         @RequestParam(name = "name")
         name: String?,
