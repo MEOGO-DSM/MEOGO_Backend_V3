@@ -47,13 +47,13 @@ class PostController(
     ) =
         createPostService.execute(request, image)
 
-    @Operation(summary = "댓글 삭제")
+    @Operation(summary = "게시글 삭제")
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@RequestParam("post_id") id: Long) =
         deletePostService.execute(id)
 
-    @Operation(summary = "댓글 수정")
+    @Operation(summary = "게시글 수정")
     @PatchMapping("/modify")
     fun modify(
         @RequestParam("post_id") id: Long,

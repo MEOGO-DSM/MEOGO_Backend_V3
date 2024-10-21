@@ -31,19 +31,15 @@ class CareerFeignClientService(
     }
 
     fun addToList(schoolInfoJson: CareerSchoolListResponse): List<School> {
-        val schoolList = mutableListOf<School>()
-        for (school in schoolInfoJson.dataSearch.content) {
-            schoolList.add(
-                School(
-                    id = school.seq.toInt(),
-                    link = school.link,
-                    schoolGubun = school.let { it.schoolGubun }.toString(),
-                    adres = school.adres,
-                    schoolName = school.schoolName
-                )
-
+        val content = schoolInfoJson.dataSearch.content ?: return emptyList()
+        return content.map { school ->
+            School(
+                id = school.seq.toInt(),
+                link = school.link,
+                schoolGubun = school.let { it.schoolGubun }.toString(),
+                adres = school.adres,
+                schoolName = school.schoolName
             )
         }
-        return schoolList
     }
 }
