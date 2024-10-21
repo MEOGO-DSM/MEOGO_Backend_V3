@@ -1,6 +1,7 @@
 package org.meogo.domain.post.presentation
 
-import lombok.RequiredArgsConstructor
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.meogo.domain.post.presentation.dto.request.PostRequest
 import org.meogo.domain.post.service.CreatePostService
 import org.meogo.domain.post.service.DeletePostService
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
 import javax.validation.Valid
 
-@RequiredArgsConstructor
+@Tag(name = "Community API")
 @RestController
 @RequestMapping("/community")
 class PostController(
@@ -35,6 +36,7 @@ class PostController(
     private val queryMyPostService: QueryMyPostService
 ) {
 
+    @Operation(summary = "게시글 작성")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun create(
@@ -45,11 +47,13 @@ class PostController(
     ) =
         createPostService.execute(request, image)
 
-    @DeleteMapping()
+    @Operation(summary = "댓글 삭제")
+    @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@RequestParam("post_id") id: Long) =
         deletePostService.execute(id)
 
+    @Operation(summary = "댓글 수정")
     @PatchMapping("/modify")
     fun modify(
         @RequestParam("post_id") id: Long,
@@ -59,16 +63,20 @@ class PostController(
         @RequestPart("image") image: MultipartFile?
     ) = modifyPostService.execute(id, request, image)
 
+    @Operation(summary = "모든 게시글 조회")
     @GetMapping("/query/all")
     fun queryAll() = queryAllPostService.execute()
 
+    @Operation(summary = "학교별 게시글 조회")
     @GetMapping("/query")
     fun querySchool(@RequestParam(name = "school_id") schoolId: Int) = querySchoolPostService.execute(schoolId)
 
+    @Operation(summary = "게시글 상세보기")
     @GetMapping("/query/detail")
     fun queryPostDetail(@RequestParam(name = "post_id") id: Long) =
         queryPostDetailService.execute(id)
 
+    @Operation(summary = "내가 쓴 게시글 조회")
     @GetMapping("/query/my")
     fun queryMyPosts() = queryMyPostService.execute()
 }

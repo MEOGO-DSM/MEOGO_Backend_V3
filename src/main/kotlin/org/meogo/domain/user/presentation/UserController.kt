@@ -1,5 +1,7 @@
 package org.meogo.domain.user.presentation
 
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.meogo.domain.user.presentation.dto.request.UserCheckRequest
 import org.meogo.domain.user.presentation.dto.request.UserModifyRequest
 import org.meogo.domain.user.presentation.dto.request.UserSignInRequest
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
 import javax.validation.Valid
 
+@Tag(name = "User API")
 @RestController
 @RequestMapping("/user")
 class UserController(
@@ -32,6 +35,7 @@ class UserController(
     private val queryMyPageService: QueryMyPageService,
     private val modifyUserInfoService: ModifyUserInfoService
 ) {
+    @Operation(summary = "회원가입")
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
     fun signUp(
@@ -40,18 +44,22 @@ class UserController(
     ): TokenResponse =
         userSignUpService.execute(request)
 
+    @Operation(summary = "로그인")
     @PostMapping("/signin")
     fun signIn(@RequestBody request: UserSignInRequest): TokenResponse =
         userSignInService.execute(request)
 
+    @Operation(summary = "아이디 중복 여부 반환")
     @PostMapping("/check")
     fun checkAccountId(@RequestBody request: UserCheckRequest): Boolean =
         userCheckAccountIdService.execute(request)
 
+    @Operation(summary = "마이페이지")
     @GetMapping("/my")
     fun myPage(): MyPageResponse =
         queryMyPageService.execute()
 
+    @Operation(summary = "마이페이지 수정")
     @PatchMapping("/modify")
     fun updateProfile(
         @RequestPart(name = "image")

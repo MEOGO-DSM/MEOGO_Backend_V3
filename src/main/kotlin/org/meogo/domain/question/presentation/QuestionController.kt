@@ -1,5 +1,7 @@
 package org.meogo.domain.question.presentation
 
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.meogo.domain.question.enum.QuestionType
 import org.meogo.domain.question.presentation.dto.request.ModifyQuestionRequest
 import org.meogo.domain.question.presentation.dto.request.QuestionRequest
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
+@Tag(name = "Question API")
 @RestController
 @RequestMapping("/question")
 class QuestionController(
@@ -31,6 +34,7 @@ class QuestionController(
     private val modifyQuestionService: ModifyQuestionService,
     private val deleteQuestionService: DeleteQuestionService
 ) {
+    @Operation(summary = "질문 작성")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     fun createQuestion(
@@ -38,6 +42,7 @@ class QuestionController(
         request: QuestionRequest
     ) = createQuestionService.execute(request)
 
+    @Operation(summary = "질문 수정")
     @PatchMapping("/modify")
     fun modifyQuestion(
         @RequestParam(name = "question_id")
@@ -47,22 +52,26 @@ class QuestionController(
     ) =
         modifyQuestionService.execute(questionId, request)
 
+    @Operation(summary = "학교별 질문 조회")
     @GetMapping("/query")
     fun querySchoolQuestion(@RequestParam(name = "school_id")schoolId: Int) =
         querySchoolQuestionService.execute(schoolId)
 
+    @Operation(summary = "학교별 + 태그별 질문 조회")
     @GetMapping("/query/tag")
     fun queryTypeQuestion(
         @RequestParam(name = "school_id")schoolId: Int,
         @RequestParam(name = "tag") type: QuestionType
     ) = queryTypeQuestionService.execute(schoolId, type)
 
+    @Operation(summary = "질문 상세보기")
     @GetMapping("/detail")
     fun queryDetail(@RequestParam(name = "question_id")questionId: Long) =
         queryDetailQuestionService.execute(questionId)
 
+    @Operation(summary = "질문 삭제")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping()
+    @DeleteMapping
     fun deleteQuestion(@RequestParam(name = "question_id")questionId: Long) =
         deleteQuestionService.execute(questionId)
 }
