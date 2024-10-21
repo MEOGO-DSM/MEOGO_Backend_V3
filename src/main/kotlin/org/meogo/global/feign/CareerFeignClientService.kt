@@ -22,7 +22,7 @@ class CareerFeignClientService(
             searchSchoolNm = schoolName,
             region = region,
             sch1 = sch1,
-            perPage = 100
+            perPage = FeignRequestProperty.PER_PAGE
         )
 
         val schoolInfoJson = Gson().fromJson(schoolInfoSchool, CareerSchoolListResponse::class.java)

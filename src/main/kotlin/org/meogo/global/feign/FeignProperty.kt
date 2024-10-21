@@ -9,10 +9,12 @@ object FeignProperty {
     const val SEARCH_SCHOOL_NM = "searchSchulNm"
     const val REGION = "region"
     const val SCH1 = "sch1"
+    const val PER_PAGE = "perPage"
 }
 
 object FeignRequestProperty {
     const val SVC_TYPE = "api"
     const val SVC_CODE = "SCHOOL"
     const val CONTENT_TYPE = "json"
+    const val PER_PAGE = 500
 }

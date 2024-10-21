@@ -17,6 +17,6 @@ interface CareerFeignClient {
         @RequestParam(name = FeignProperty.SEARCH_SCHOOL_NM) searchSchoolNm: String?,
         @RequestParam(name = FeignProperty.REGION) region: String?,
         @RequestParam(name = FeignProperty.SCH1) sch1: String?,
-        @RequestParam(name = "perPage") perPage: Int
+        @RequestParam(name = FeignProperty.PER_PAGE) perPage: Int
     ): String
 }
