@@ -30,8 +30,4 @@ class FcmConfig(
             e.printStackTrace()
         }
     }
-
-    companion object {
-        private const val PATH = "./firebase_credentials.json"
-    }
 }
