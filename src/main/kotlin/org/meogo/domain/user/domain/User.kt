@@ -26,6 +26,7 @@ data class User(
 
     @Column(name = "device_token", nullable = true)
     var deviceToken: String? = null
+
 ) : BaseUUIDEntity() {
     fun updateProfile(name: String, enrolledSchool: Int, profile: String): User {
         this.name = name
