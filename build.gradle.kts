@@ -38,6 +38,7 @@ dependencies {
     implementation("com.amazonaws:aws-java-sdk-s3:1.12.529")
     implementation("com.google.firebase:firebase-admin:8.1.0")
     implementation("javax.servlet:javax.servlet-api:4.0.1")
+    implementation("org.springframework.cloud:spring-cloud-starter-openfeign:3.1.4")
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("com.mysql:mysql-connector-j")
     annotationProcessor("org.projectlombok:lombok")
