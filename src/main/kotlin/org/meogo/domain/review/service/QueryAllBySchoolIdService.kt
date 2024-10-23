@@ -27,7 +27,7 @@ class QueryAllBySchoolIdService(
                 val user = userFacade.getUserById(review.userId) ?: throw UserNotFoundException
                 val profile = fileUtil.generateObjectUrl(user.profile, Path.USER)
                 val image = review.picture?.split(",")?.map { pic ->
-                    fileUtil.generateObjectUrl(pic.trim(), Path.REVIEW)
+                    fileUtil.generateObjectUrl(pic.trim(), Path.REVIEW).substringBefore("?")
                 } ?: emptyList()
                 ReviewResponse(
                     id = review.id,

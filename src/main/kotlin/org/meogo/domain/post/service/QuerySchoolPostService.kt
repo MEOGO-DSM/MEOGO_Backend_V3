@@ -3,6 +3,7 @@ package org.meogo.domain.post.service
 import org.meogo.domain.post.domain.PostRepository
 import org.meogo.domain.post.presentation.dto.response.PostResponse
 import org.meogo.global.s3.FileUtil
+import org.meogo.global.s3.Path
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -17,9 +18,10 @@ class QuerySchoolPostService(
         val posts = postRepository.findBySchoolId(schoolId)
 
         return posts.map { post ->
+            val image = post.image?.let { fileUtil.generateObjectUrl(it, Path.COMMUNITY) }
             PostResponse(
                 post,
-                fileUtil
+                image
             )
         }.sortedByDescending { it.id }
     }
