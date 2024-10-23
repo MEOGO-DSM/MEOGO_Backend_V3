@@ -1,8 +1,6 @@
 package org.meogo.domain.post.presentation.dto.response
 
 import org.meogo.domain.post.domain.Post
-import org.meogo.global.s3.FileUtil
-import org.meogo.global.s3.Path
 
 data class PostResponse(
     val id: Long,
@@ -17,7 +15,7 @@ data class PostResponse(
 ) {
     constructor(
         post: Post,
-        fileUtil: FileUtil
+        image: String?
     ) : this(
         post.id,
         "익명",
@@ -26,7 +24,7 @@ data class PostResponse(
         post.format(post.date),
         post.keyWord?.split(",")?.map { it.trim() } ?: emptyList(),
         post.schoolId,
-        post.image?.let { fileUtil.generateObjectUrl(it, Path.COMMUNITY) },
+        image?.substringBefore("?"),
         post.good
     )
 }
