@@ -16,7 +16,6 @@ class QueryReviewPictureService(
     @Transactional
     fun queryReviewPicture(schoolId: Int): List<ReviewPictureResponse> {
         val reviews = reviewRepository.findAllBySchoolId(schoolId)?.sortedByDescending { it.id } ?: return emptyList()
-        println(reviews)
         val picturesByYear = reviews
             .flatMap { review ->
                 val year = review.date.year
