@@ -16,16 +16,19 @@ class QueryReviewPictureService(
     @Transactional
     fun queryReviewPicture(schoolId: Int): List<ReviewPictureResponse> {
         val reviews = reviewRepository.findAllBySchoolId(schoolId)?.sortedByDescending { it.id } ?: return emptyList()
-
-        val pictures = reviews
+        println(reviews)
+        val picturesByYear = reviews
             .flatMap { review ->
                 val year = review.date.year
                 review.picture?.split(",")?.map { pic ->
-                    val pictureUrl = fileUtil.generateObjectUrl(pic.trim(), Path.REVIEW)
-                    ReviewPictureResponse(year, pictureUrl)
+                    val imgUrl = fileUtil.generateObjectUrl(pic.trim(), Path.REVIEW)
+                    Pair(year, imgUrl)
                 } ?: emptyList()
             }
+            .groupBy { it.first }
 
-        return pictures
+        return picturesByYear.map { (year, urls) ->
+            ReviewPictureResponse(year, urls.map { it.second })
+        }
     }
 }
