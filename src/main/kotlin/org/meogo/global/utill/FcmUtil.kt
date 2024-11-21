@@ -18,14 +18,12 @@ class FcmUtil {
     fun sendMessage(fcmToken: List<String>, title: String, message: String) {
         val message = messageSetting(fcmToken, title, message)
 
-        println("호우")
         try {
             firebase.sendMulticastAsync(message)
         } catch (e: FirebaseMessagingException) {
             throw FcmException
         }
 
-        println("이게되네")
     }
 
     fun messageSetting(fcmToken: List<String>, title: String, message: String) =
@@ -51,5 +49,5 @@ class FcmUtil {
                             .putCustomData("body", message)
                             .build()
                     ).build()
-            ).build()
+            ).build()!!
 }
