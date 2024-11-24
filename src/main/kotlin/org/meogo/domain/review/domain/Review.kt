@@ -32,7 +32,7 @@ class Review(
     var content: String,
 
     @Column(name = "key_word")
-    val keyWord: String,
+    var keyWord: String,
 
     var picture: String?
 
@@ -45,6 +45,7 @@ class Review(
     ): Review {
         this.content = content
         this.star = star
+        this.keyWord = keyWord
         this.picture = picture
         return this
     }
