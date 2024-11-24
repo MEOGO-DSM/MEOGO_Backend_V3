@@ -31,7 +31,7 @@ class CareerFeignClientService(
     }
 
     fun addToList(schoolInfoJson: CareerSchoolListResponse): List<School> {
-        val content = schoolInfoJson.dataSearch.content ?: return emptyList()
+        val content = schoolInfoJson.dataSearch.content
         return content.map { school ->
             School(
                 id = school.seq.toInt(),
