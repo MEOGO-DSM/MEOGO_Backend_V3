@@ -23,7 +23,6 @@ class FcmUtil {
         } catch (e: FirebaseMessagingException) {
             throw FcmException
         }
-
     }
 
     fun messageSetting(fcmToken: List<String>, title: String, message: String) =
