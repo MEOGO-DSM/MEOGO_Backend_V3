@@ -1,9 +1,10 @@
 package org.meogo.domain.bookmark.service
 
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.meogo.domain.bookmark.domain.Bookmark
 import org.meogo.domain.bookmark.domain.BookmarkRepository
@@ -13,15 +14,13 @@ import org.meogo.domain.user.domain.UserRole
 import org.meogo.domain.user.facade.UserFacade
 import org.mockito.InjectMocks
 import org.mockito.Mock
+import org.mockito.junit.jupiter.MockitoExtension
 import org.mockito.kotlin.any
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.junit.jupiter.SpringExtension
 
-@SpringBootTest
-@ExtendWith(SpringExtension::class)
+@ExtendWith(MockitoExtension::class)
 @ActiveProfiles("test")
 class BookmarkServiceTest {
 
@@ -40,7 +39,7 @@ class BookmarkServiceTest {
     @BeforeEach
     fun setUp() {
         user = User(
-            name = "Test User",
+            name = "test",
             accountId = "test",
             password = "password",
             role = UserRole.USER,
@@ -109,10 +108,8 @@ class BookmarkServiceTest {
         whenever(bookmarkRepository.findBySchoolIdAndUser(schoolId, user)).thenReturn(null)
 
         // when & then
-        try {
+        assertThrows<BookmarkNotFoundException> {
             bookmarkService.deleteBookmark(schoolId)
-        } catch (e: BookmarkNotFoundException) {
-            assertNotNull(e)
         }
     }
 }
