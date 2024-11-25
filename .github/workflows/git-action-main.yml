@@ -19,7 +19,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          
+
       - name: Build Gradle
         uses: gradle/gradle-build-action@v2
         with:
@@ -27,3 +27,6 @@ jobs:
             build
             --build-cache
             --no-daemon
+            
+      - name: Run tests with verbose output
+        run: ./gradlew test -i 
