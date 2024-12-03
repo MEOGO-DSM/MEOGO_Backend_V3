@@ -21,6 +21,9 @@ jobs:
       CAREER_KEY: ${{ secrets.CAREER_KEY }}
       ACCESS_EXP: ${{ secrets.ACCESS_EXP }}
       REFRESH_EXP: ${{ secrets.REFRESH_EXP }}
+      DB_URL: ${{ secrets.DB_URL }}
+      DB_USERNAME: ${{ secrets.DB_USERNAME }}
+      DB_PASSWORD: ${{ secrets.PASSWORD }}
 
     steps:
       - uses: actions/checkout@v3
