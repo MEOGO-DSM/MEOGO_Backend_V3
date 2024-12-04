@@ -50,7 +50,7 @@ class BookmarkServiceTest {
 
     @Test
     fun `북마크 저장`() {
-        // given & then
+        // given & when
         bookmarkService.execute(schoolId)
 
         // then
