@@ -2,9 +2,9 @@ name: meogo-main
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
@@ -38,9 +38,8 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: |
-            build
-            --build-cache
+            clean build
             --no-daemon
 
       - name: Run tests with verbose output
-        run: ./gradlew test -i
+        run: ./gradlew test --debug
