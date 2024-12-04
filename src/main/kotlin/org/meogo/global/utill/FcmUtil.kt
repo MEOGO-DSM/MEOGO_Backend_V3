@@ -15,8 +15,8 @@ class FcmUtil {
     private val firebase: FirebaseMessaging
         get() = FirebaseMessaging.getInstance()
 
-    fun sendMessage(fcmToken: List<String>, title: String, message: String) {
-        val message = messageSetting(fcmToken, title, message)
+    fun sendMessage(fcmToken: List<String>, title: String, content: String) {
+        val message = messageSetting(fcmToken, title, content)
 
         try {
             firebase.sendMulticastAsync(message)
@@ -25,19 +25,19 @@ class FcmUtil {
         }
     }
 
-    fun messageSetting(fcmToken: List<String>, title: String, message: String) =
+    fun messageSetting(fcmToken: List<String>, title: String, content: String) =
         MulticastMessage.builder()
             .addAllTokens(fcmToken)
             .setNotification(
                 Notification.builder()
                     .setTitle(title)
-                    .setBody(message)
+                    .setBody(content)
                     .build()
             )
             .setAndroidConfig(
                 AndroidConfig.builder()
                     .putData("title", title)
-                    .putData("body", message)
+                    .putData("body", content)
                     .build()
             )
             .setApnsConfig(
@@ -45,7 +45,7 @@ class FcmUtil {
                     .setAps(
                         Aps.builder()
                             .putCustomData("title", title)
-                            .putCustomData("body", message)
+                            .putCustomData("body", content)
                             .build()
                     ).build()
             ).build()!!

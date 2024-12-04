@@ -1,0 +1,56 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      maxLifetime: 580000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+    database: mysql
+
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+auth:
+    jwt:
+      secretKey: ${SECRET_KEY}
+      accessExp: ${ACCESS_EXP}
+      refreshExp: ${REFRESH_EXP}
+      header: "Authorization"
+      prefix: "Bearer "
+
+cloud:
+    aws:
+      credentials:
+        access-key: ${AWS_ACCESS_KEY}
+        secret-key: ${AWS_SECRET_KEY}
+      s3:
+        default-image: ${DEFAULT_IMAGE}
+        bucket: ${S3_BUCKET}
+      region:
+        static: ap-northeast-2
+      stack:
+        auto: false
+
+firebase:
+    url: ${FCM_URL}
+
+url:
+    career: ${CAREER_URL}
+
+open-feign:
+    career-key: ${CAREER_KEY}
+
+server:
+    port: 8989
