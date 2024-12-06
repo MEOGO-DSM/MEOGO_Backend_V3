@@ -1,24 +1,26 @@
 spring:
-  config.activate.on-profile: default
-datasource:
-  driver-class-name: com.mysql.cj.jdbc.Driver
-  url: ${DB_URL}
-  username: ${DB_USERNAME}
-  password: ${DB_PASSWORD}
-  hikari:
-    maxLifetime: 580000
-jpa:
-  hibernate:
-    ddl-auto: update
-  show-sql: true
-  properties:
+  config:
+    activate:
+      on-profile: default
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      maxLifetime: 580000
+  jpa:
     hibernate:
-      format_sql: true
-  open-in-view: false
-  database: mysql
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+    database: mysql
 
-jackson:
-  property-naming-strategy: SNAKE_CASE
+  jackson:
+    property-naming-strategy: SNAKE_CASE
 
 auth:
   jwt:
@@ -52,4 +54,3 @@ open-feign:
 
 server:
   port: 8989
-
