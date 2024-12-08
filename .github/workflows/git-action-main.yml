@@ -42,4 +42,4 @@ jobs:
             --no-daemon
 
       - name: Run tests with verbose output
-        run: ./gradlew test --debug
+        run: ./gradlew test --debug --scan
